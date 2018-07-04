@@ -1,0 +1,215 @@
+Version 1.2 - April 17, 2018
+
+  - Simplicity will send a custom user agent when checking for updates
+  - More accurate error reporting when Warcraft III hashes are out of date
+  - Main form changes
+    - Fixed a typo with the Connection Timeout label
+    - Increased the font size of the Use Custom Initiates checkbox
+    - Re-arranged text around in main configuration section for more clarity
+  - Fixed Warcraft III Hashing
+  - Updated version byte to 0x1D
+  - Added a BNLS server configuration
+  - When loading the configuration, if there is an error or a value is
+    not present it will be given a default value
+  - Added an option to remember window position
+  - Fixed a typo in the changelog for the last update (January 10, 2018, not 2017)
+  - Fixed an RTE when deleting the config and closing the program
+  - If the WAR3 folder doesn't exist it will be created
+  - Fixed an issue where duplicate CD-Keys could be loaded into the program
+  - Small performance gain when closing program
+  - Configuration changes
+    - Renamed the SaveOnExit config value to SaveClanInfo
+    - Renamed the PerProxy config value to ConnectsPerProxy
+    - Renamed CDKeys.txt to CD-Keys.txt
+    - Renamed InUse.txt to InUseKeys.txt
+    - A script has been supplied to migrate the existing environment
+      - Simply run Simplicity migration.vbs to perform the migration
+  - When starting Simplicity with a CD-Keys.txt file only 1 popup message
+    will be displayed instead of two
+  - Added a username and password label to the custom initiates setting dialog
+    for the username and password text boxes
+  - Increased the size of the connection text box for easier readability
+  - Added the program icon to the manage in itiates window
+  - Added appropriate icons to each message box
+  - Re-wrote the readme as a PDF including pictures
+  - Spaced out the changelog notes to look a little better
+  - When loading Simplicity, if no keys or proxies were found their corresponding
+    loaded messages will not show
+
+Version 1.1 - January 10, 2018
+
+  - Updated reference of war3.exe to Warcraft III.exe
+  - Fixed an issue where clans whose tags were less than 4 characters were
+    unable to be created properly
+  - Clan tags will now be properly validated to have only alphanumeric
+    characters in them
+  - Updated the flow of creating a clan
+    - Instead of disconnecting, if the clan tag is in use, Simplicity will
+      re-enable the clan tag and clan description boxes to allow you to
+      enter a new tag and description (Simplicity will tell you)
+    - When attempting to create a clan, the "Create Clan" button is disabled
+  - Fixed/changed some messages
+  - Changelog removed from readme and added to changelog.txt
+  - Updated readme
+
+Version 1.01 - July 19, 2017
+
+  - Updated Warcraft III version byte to 0x1C
+  - Update check location change
+
+Version 1.0 - October 30, 2016
+
+  - Simplicity no longer attempts to probe the chief / initiates (an issue
+    with a Battle.Net maintenance caused some servers to not work properly)
+  - When an initiate gets an invalid password, Simplicity will continue to
+    attempt new initiates
+  - You can use custom initiates when creating a clan now! (when the list
+    runs out, Simplicity continues with trying the normal initiates)
+  - Removed the internal IP list, now using a DNS resolver, so gateway configurations
+    using IPs will use the most current ones
+  - Fixed some messages
+  - When an initiate is clanned, Simplicity no longer stops and instead
+    continues trying another initiate
+  - Removed mention of Clan CODE on startup
+  - If the chieftain requires you to remove friends, you no longer need to click on
+    "check clan tag", simplicity will automatically check before this step
+  - Shifted some text around on the GUI
+  - Added an additional message on startup of number of CD-Keys loaded
+  - Main GUI resized to emphasize the borders of the main and clan
+    configuration sections
+  - Using latest version byte for Warcraft III
+  - Fixed unable to properly create a clan
+  - The disconnect all button is only enabled when clan creation is active and the
+    reload keys and reset proxies buttons are disabled when clan creation is active
+  - The chief will no longer have initiates added to its queue if they were already
+    friends with it previously (no extra queue messages)
+  - All textboxes are diabled when checking keys and re-enabled when all
+    have been disconnected
+  - Fixed an issue where version updates that have whole numbers (4.0, 5.0, etc.) only
+    show up as whole numbers and not decimal numbers
+  - The chat window is cleared automatically after 50 messages have been sent to it
+  - The chieftain kept re-acquiring its friends list everytime it connected to battle.net
+    so there could be issues after running Simplicity at least once
+  - When starting to check keys, Simplicity will no longer hand out keys/proxies/initiates
+    if they were already handed out
+  - Chief queue mistakingly called all initiates as voided even if some are not
+  - All message boxes now have the appropriate buttons and program title
+  - A label of how many bots are connected is now shown on the main GUI
+  - Friends list removal GUI has been improved
+  - If trying to close the friends list removal tool, you will be prompted by a warning
+  - Closing the friends list removal tool prematurely will reset the connections
+  - Chat is no longer cleared when reloading proxies or CD-Keys
+  - If multiple Warcraft III usernames are in the same channel Simplicity's initiates are
+    then it will only choose its own initiates to create the clan 
+  - Simplicity will reset if the specified clan tag is taken when trying to create the clan
+  - If Simplicity runs out of proxies, it will no longer try to connect to a blank proxy
+    when attempting to reconnect with "Check Keys"
+
+Version 0.72 - November 1, 2012
+
+  - New IP list for Europe
+  - Corrected a problem that when Simplicity checked for a new version, if
+    it was the same verison, an update notification would show anyway
+
+Version 0.71 - September 11, 2012
+
+  - Some code improvement
+  - Emergency update for new west IPs
+  - I pay my respect to the men and women who lost their lives on this day 11 years ago
+
+Version 0.7 - August 17, 2012
+
+  - Slight code improvement in different areas 
+  - Updated USEast's IP list, since they changed when Azeroth was put on new hardware
+  - Simplicity checks to see if valid BNCS packets get received, else it reconnects on a new proxy
+  - Missing a message for if the initiates are already part of a clan
+
+Version 0.6 - May 24, 2012
+
+  - Fixed an RTE that prevented some users from running Simplicity
+  - Separated the disconnect and proxy reload behavior into separate buttons
+  - Simplicity incorrectly checked the clan tag field instead of clan description when
+    checking to see if it was blank before creating the clan
+  - On refreshing keys, the screen clears
+  - All instances of "bot #" are replaced with "Initiate #"
+  - Initiate logic separated from Chieftain logic
+  - Simplicity wasn't assigning a key index to future connections, breaking the key export feature
+  - Chieftain requests friends list upon connecting to Battle.Net, for convenience
+  - Using an integer instead of a collection to determine if 10 bots are online
+  - Potentially fixed an error stating that sometimes more than 10 bots were ready
+    for creating the clan
+  - When all required friends are removed, simplicity prevents additional removals
+  - Chief will skip adding initiates to friends list, if it already has them as friends
+  - A new option allows you to save the clan information to file when closing Simplicity
+  - Simplicity will now disconnect from an HTTP proxy when the proxy fails the connection to BNET
+  - Prevented an exploit where a user could create a certain clan, disabling Simplicity from
+    working on the realm that clan was made in
+  - Simplicity is persistent in making sure initiates / chieftain are not disconnected when
+    either checking clan tag, or creating the clan
+  - Simplicity will tell you why a clan fails to be created instead of responding with an error code
+  - Updated readme with some more information
+  - Simplicity will respond that it failed to check for update, instead of crashing
+  - Fixed the "unable to decode CD-Keys" error having to do with spaces in CDKeys.txt file
+  - Created by is now by Vector, not Vector@USEast
+
+Version 0.5 - March 17, 2012
+
+  - Fixed a bug that caused CreatedClans.txt to not show the realm name (and use an IP instead) if the
+    server selected was not useast.battle.net
+  - The menu bar now shows the version of Simplicity
+  - Update on load that tells what clan Simplicity was made in (Late 3/17/2012 update)
+  - The create clan button is disabled upon successful creation of a clan
+  - Reconnect timer disables until a new proxy is added, then it is enabled again
+  - Simplicity incorrectly checked to see if 9 bots were connected if one of them drops, instead of 10
+  - Performance tweaks
+  - Dictionary for holding already added bots for friends list feature clears upon reset (error will
+    happen otherwise if you get the same error at a later time)
+  - Added a needed boolean that without, would require you to restart Simplicity after using the
+    friends list removal feature, then trying to create another clan
+  - Clans exported to CreatedClans.txt will no longer have an added period to the end of both passwords
+    (this could cause confusion if your password ended with a period)
+
+
+Version 0.4 - August 13, 2011
+
+  - The initiate queue is disabled when the chief disconnects, and re-enabled when
+    it comes back online
+  - Fixed a few labels
+  - "Check Clan Tag" button is disabled again if a user is disconnected after
+    all bots are ready, and is re-enabled after 10 are fully connected
+  - If an account reconnects after being suddenly disconnected, an AddChat
+    will display upon entering chat, instead of after checking
+    clanned key
+  - Implemented checks for both password fields when creating a clan
+  - Removed unused variables
+  - No longer saves initiate username to the config file, or either password
+  - Name is no longer made up of a prefix, postfix, and clan tag, but a single string
+  - Increased the initiate queue from 4 seconds to 6 seconds
+  - Fixed a rare RTE while connecting on some occasions, as well as fixing Vista/7
+    incompatibility (I had used Val() to obtain the length for each BNCS header
+    which consequently broke Vista/7 compatibility)
+  - UI enhancements
+  - A log is created for each clan that is created. See CreatedClans.txt for a list of past clans
+    created using Simplicity
+  - "Chieftain" config value no longer created in Config.ini
+  - Will ask if you did not supply a description, if you want to add one, when creating the clan
+  - If total initiates to create clan is less than 9 when checking clan tag, a form
+    will come up allowing you to remove friends from the chief's friends list
+  - Updated readme
+
+Version 0.3 - July 21, 2011
+
+  - Initiate preview is updated when you tick the check box
+  - Fixed an Overflow error when loading proxies that have a port greater than 32,767
+
+Version 0.2 - July 18, 2011
+
+  - Fixed all the tab indexes so the tab key works properly
+  - Fixed problem where voided initiates weren't added to chief's friends list if the chief
+    was not on a voided key
+  - UI enhancement, making it more user friendly
+  - Updated readme a bit
+
+Version 0.1 - July 17, 2011
+
+  - First release of Simplicity!
