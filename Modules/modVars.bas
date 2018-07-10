@@ -1,6 +1,8 @@
 Attribute VB_Name = "modVars"
-Public Const PROGRAM_VERSION                  As String = "1.2"
+Public Const PROGRAM_VERSION                  As String = "1.2.0"
 Public Const PROGRAM_TITLE                    As String = "Simplicity v" & PROGRAM_VERSION & " by Vector"
+
+Public Const RELEASES_URL                     As String = "https://github.com/MisterVector/Simpilcity-Clan-Creator-Legacy/releases"
 
 Public Const DEFAULT_SERVER                   As String = "useast.battle.net"
 Public Const DEFAULT_BNLS_SERVER              As String = "jbls.codespeak.org"

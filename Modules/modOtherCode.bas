@@ -243,3 +243,19 @@ Public Sub unloadAll()
   Next
 End Sub
 
+Public Function isNewVersion(checkVersion As String) As Boolean
+    Dim currentVersionParts() As String, versionParts() As String
+    Dim currentVersionPoints As Long, versionPoints As Long
+    Dim updated As Boolean
+  
+    currentVersionParts = Split(PROGRAM_VERSION, ".")
+    versionParts = Split(checkVersion, ".")
+    
+    currentVersionPoints = ((currentVersionParts(0) * 1000000) + (currentVersionParts(1) * 1000) _
+                         + currentVersionParts(2))
+    
+    versionPoints = ((versionParts(0) * 1000000) + (versionParts(1) * 1000) + versionParts(2))
+
+    isNewVersion = (versionPoints > currentVersionPoints)
+End Function
+

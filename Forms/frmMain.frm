@@ -1128,7 +1128,7 @@ Private Sub sckClanMembers_Error(index As Integer, ByVal Number As Integer, Desc
 End Sub
 
 Private Sub sckUpdateCheck_Connect()
-  sckUpdateCheck.SendData "GET /projects/simplicity/Version.txt HTTP/1.1" & vbCrLf _
+  sckUpdateCheck.SendData "GET /projects/simplicity/CurrentVersion.txt HTTP/1.1" & vbCrLf _
                           & "User-Agent: Simplicity/" & PROGRAM_VERSION & vbCrLf _
                           & "Host: files.codespeak.org" & vbCrLf & vbCrLf
 End Sub
@@ -1214,14 +1214,19 @@ End Sub
 Private Sub tmrCheckUpdate_Timer()
   On Error GoTo err
   
-  Dim ver As String
+  Dim versionToCheck As String, updateMsg As String, msgBoxResult As Integer
   
-  ver = Split(updateString, "Content-Type: text/plain" & vbCrLf & vbCrLf)(1)
+  versionToCheck = Split(updateString, "Content-Type: text/plain" & vbCrLf & vbCrLf)(1)
 
-  If ver > PROGRAM_VERSION Then
-    AddChat vbCyan, "NEW VERSION UPDATE!!!", vbYellow, " There is a new version available."
-    AddChat vbWhite, "Your version: " & PROGRAM_VERSION & ". New version: " & ver
-    AddChat vbYellow, "To download a newer version, see files.codespeak.org/projects/simplicity"
+  If isNewVersion(versionToCheck) Then
+    updateMsg = "There is a new update for Simplicity!" & vbNewLine & vbNewLine & "Your version: " & PROGRAM_VERSION & " new version: " & versionToCheck & vbNewLine & vbNewLine _
+              & "Would you like to visit the downloads page for updates?"
+
+    msgBoxResult = MsgBox(updateMsg, vbYesNo Or vbInformation, "New Simplicity version available!")
+
+    If (msgBoxResult = vbYes) Then
+        ShellExecute 0, "open", RELEASES_URL, vbNullString, vbNullString, 4
+    End If
   End If
   
 err:
