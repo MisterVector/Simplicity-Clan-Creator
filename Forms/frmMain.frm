@@ -4,20 +4,20 @@ Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Begin VB.Form frmMain 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Simplicity Clan Creator %v by Vector"
-   ClientHeight    =   7515
+   ClientHeight    =   7455
    ClientLeft      =   150
-   ClientTop       =   540
+   ClientTop       =   780
    ClientWidth     =   8145
    Icon            =   "frmMain.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7515
+   ScaleHeight     =   7455
    ScaleWidth      =   8145
    StartUpPosition =   3  'Windows Default
    Begin MSWinsockLib.Winsock sckBNLS 
       Left            =   6840
-      Top             =   4920
+      Top             =   4800
       _ExtentX        =   741
       _ExtentY        =   741
       _Version        =   393216
@@ -25,16 +25,16 @@ Begin VB.Form frmMain
    Begin VB.Timer tmrChiefReconnect 
       Enabled         =   0   'False
       Left            =   6840
-      Top             =   5400
+      Top             =   5280
    End
    Begin VB.Timer tmrChiefTimeout 
       Enabled         =   0   'False
       Left            =   5880
-      Top             =   5880
+      Top             =   5760
    End
    Begin MSWinsockLib.Winsock sckChieftain 
       Left            =   6360
-      Top             =   4920
+      Top             =   4800
       _ExtentX        =   741
       _ExtentY        =   741
       _Version        =   393216
@@ -44,18 +44,18 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   6720
       TabIndex        =   22
-      Top             =   6600
+      Top             =   6480
       Width           =   1335
    End
    Begin VB.Timer tmrUpdate 
       Enabled         =   0   'False
       Interval        =   450
       Left            =   5400
-      Top             =   5880
+      Top             =   5760
    End
    Begin MSWinsockLib.Winsock sckUpdateCheck 
       Left            =   5400
-      Top             =   4920
+      Top             =   4800
       _ExtentX        =   741
       _ExtentY        =   741
       _Version        =   393216
@@ -74,7 +74,7 @@ Begin VB.Form frmMain
       Height          =   2295
       Left            =   120
       TabIndex        =   29
-      Top             =   2040
+      Top             =   1920
       Width           =   7935
       Begin VB.CommandButton btnManageInitiates 
          Caption         =   "Manage Initiates"
@@ -291,25 +291,25 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   5400
       TabIndex        =   21
-      Top             =   6600
+      Top             =   6480
       Width           =   1335
    End
    Begin VB.Timer tmrReconnect 
       Enabled         =   0   'False
       Index           =   0
       Left            =   6360
-      Top             =   5400
+      Top             =   5280
    End
    Begin VB.Timer tmrInitiateTimeout 
       Enabled         =   0   'False
       Index           =   0
       Left            =   5880
-      Top             =   5400
+      Top             =   5280
    End
    Begin MSWinsockLib.Winsock sckClanMembers 
       Index           =   0
       Left            =   5880
-      Top             =   4920
+      Top             =   4800
       _ExtentX        =   741
       _ExtentY        =   741
       _Version        =   393216
@@ -318,7 +318,7 @@ Begin VB.Form frmMain
       Enabled         =   0   'False
       Interval        =   1750
       Left            =   5400
-      Top             =   5400
+      Top             =   5280
    End
    Begin VB.Frame Frame1 
       Caption         =   "Main Settings"
@@ -334,7 +334,7 @@ Begin VB.Form frmMain
       Height          =   1905
       Left            =   120
       TabIndex        =   23
-      Top             =   120
+      Top             =   0
       Width           =   7935
       Begin VB.CheckBox chkRememberWindowPosition 
          Caption         =   "Remember Window Position"
@@ -504,7 +504,7 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   4080
       TabIndex        =   20
-      Top             =   6600
+      Top             =   6480
       Width           =   1335
    End
    Begin VB.CommandButton btnCheckClanned 
@@ -512,7 +512,7 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   2640
       TabIndex        =   19
-      Top             =   6600
+      Top             =   6480
       Width           =   1455
    End
    Begin VB.CommandButton btnCheckClanTag 
@@ -521,7 +521,7 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   1320
       TabIndex        =   18
-      Top             =   6600
+      Top             =   6480
       Width           =   1335
    End
    Begin VB.CommandButton btnCreateClan 
@@ -530,21 +530,20 @@ Begin VB.Form frmMain
       Height          =   480
       Left            =   120
       TabIndex        =   17
-      Top             =   6600
+      Top             =   6480
       Width           =   1215
    End
    Begin RichTextLib.RichTextBox rtbChat 
       Height          =   2055
       Left            =   120
       TabIndex        =   16
-      Top             =   4440
+      Top             =   4320
       Width           =   7965
       _ExtentX        =   14049
       _ExtentY        =   3625
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -574,8 +573,14 @@ Begin VB.Form frmMain
       Height          =   255
       Left            =   180
       TabIndex        =   37
-      Top             =   7155
+      Top             =   7035
       Width           =   7755
+   End
+   Begin VB.Menu mnuFile 
+      Caption         =   "File"
+      Begin VB.Menu mnuQuit 
+         Caption         =   "Quit"
+      End
    End
 End
 Attribute VB_Name = "frmMain"
@@ -964,6 +969,10 @@ Private Sub Form_Unload(Cancel As Integer)
     
     unloadAll
   End If
+End Sub
+
+Private Sub mnuQuit_Click()
+    unloadAll
 End Sub
 
 Private Sub sckBNLS_Connect()
