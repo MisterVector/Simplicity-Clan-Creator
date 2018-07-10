@@ -47,7 +47,7 @@ Begin VB.Form frmMain
       Top             =   6480
       Width           =   1335
    End
-   Begin VB.Timer tmrUpdate 
+   Begin VB.Timer tmrCheckUpdate 
       Enabled         =   0   'False
       Interval        =   450
       Left            =   5400
@@ -1133,6 +1133,7 @@ Private Sub sckUpdateCheck_DataArrival(ByVal bytesTotal As Long)
 End Sub
 
 Private Sub sckUpdateCheck_Error(ByVal Number As Integer, Description As String, ByVal Scode As Long, ByVal Source As String, ByVal HelpFile As String, ByVal HelpContext As Long, CancelDisplay As Boolean)
+  sckUpdateCheck.Close
   AddChat vbRed, "Unable to check for update!"
 End Sub
 
