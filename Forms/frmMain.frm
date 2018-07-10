@@ -544,6 +544,7 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -772,7 +773,7 @@ Private Sub btnCheckClanTag_Click()
     Dim blCreateClan As Boolean
 
     If Not isValidClanTag(txtClanTag.text) Then
-        MsgBox "Clan tag must be between 2-4 alphanumeric characters.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
+        MsgBox "Clan tag must be between 2-4 alphanumeric characters.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
 
