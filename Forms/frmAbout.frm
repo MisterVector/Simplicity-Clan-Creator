@@ -1,14 +1,18 @@
 VERSION 5.00
 Begin VB.Form frmAbout 
+   BorderStyle     =   3  'Fixed Dialog
    Caption         =   "About Simplicity"
    ClientHeight    =   2670
-   ClientLeft      =   120
-   ClientTop       =   450
+   ClientLeft      =   45
+   ClientTop       =   375
    ClientWidth     =   6495
    Icon            =   "frmAbout.frx":0000
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    ScaleHeight     =   2670
    ScaleWidth      =   6495
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
    Begin VB.CommandButton btnOk 
       Caption         =   "Ok"
