@@ -70,7 +70,7 @@ Public Sub Chief_Send0x51(clientToken As Long, serverToken As Long, MPQFileN As 
     Exit Sub
   End If
 
-  check_revision archiveTime, MPQFileN, valueString, App.path & "\CheckRevisionFromWarden.ini", "WAR3", Version, Checksum, EXEInfo
+  check_revision archiveTime, MPQFileN, valueString, App.path & "\VersionCheck.ini", "WAR3", Version, Checksum, EXEInfo
   
   With chiefPacket
     .InsertDWORD clientToken

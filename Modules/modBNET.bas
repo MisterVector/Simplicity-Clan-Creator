@@ -70,7 +70,7 @@ Public Sub Send0x51(index As Integer, clientToken As Long, serverToken As Long, 
     Exit Sub
   End If
 
-  check_revision archiveTime, MPQFileN, valueString, App.path & "\CheckRevisionFromWarden.ini", "WAR3", Version, Checksum, EXEInfo
+  check_revision archiveTime, MPQFileN, valueString, App.path & "\VersionCheck.ini", "WAR3", Version, Checksum, EXEInfo
 
   With Packet(index)
     .InsertDWORD clientToken
