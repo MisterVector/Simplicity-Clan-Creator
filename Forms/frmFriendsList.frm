@@ -88,71 +88,71 @@ Public friendsToRemove As Integer
 Public cleanClose As Boolean
 
 Public Sub addFriends(ByVal remain As Integer)
-  Dim friendsExcludingInitiates() As String
-  friendsExcludingInitiates = chiefData.getFriendsExcludeInitiates()
-  
-  For i = 0 To UBound(friendsExcludingInitiates)
-    lstFriendsList.AddItem friendsExcludingInitiates(i)
-  Next i
-  
-  friendsToRemove = remain
-  lblFriendsToRemove.Caption = "Friends to remove: " & friendsToRemove
+    Dim friendsExcludingInitiates() As String
+    friendsExcludingInitiates = chiefData.getFriendsExcludeInitiates()
+    
+    For i = 0 To UBound(friendsExcludingInitiates)
+        lstFriendsList.AddItem friendsExcludingInitiates(i)
+    Next i
+    
+    friendsToRemove = remain
+    lblFriendsToRemove.Caption = "Friends to remove: " & friendsToRemove
 End Sub
 
 Private Sub btnContinue_Click()
-  Dim frnd As String
-  
-  chiefData.setIsReplacingFriends True
-
-  AddChat vbYellow, "Simplicity will now add the rest of the initiates."
-  frmMain.tmrQueue.Enabled = True
-  
-  cleanClose = True
-  Unload Me
+    Dim frnd As String
+    
+    chiefData.setIsReplacingFriends True
+    
+    AddChat vbYellow, "Simplicity will now add the rest of the initiates."
+    frmMain.tmrQueue.Enabled = True
+    
+    cleanClose = True
+    Unload Me
 End Sub
 
 Private Sub cmdRemoveFriend_Click()
-  Dim frnd As String
+    Dim frnd As String
+    
+    frnd = lstFriendsList.List(lstFriendsList.ListIndex)
+    If frnd = vbNullString Then Exit Sub
+    
+    With chiefPacket
+        .InsertNTString "/friends remove " & frnd
+        lstFriendsList.RemoveItem (lstFriendsList.ListIndex)
+        .sendChiefPacket &HE
+    End With
+    chiefData.removeFriend frnd
   
-  frnd = lstFriendsList.List(lstFriendsList.ListIndex)
-  If frnd = vbNullString Then Exit Sub
+    cmdRemoveFriend.Enabled = False
+    friendsToRemove = friendsToRemove - 1
+    lblFriendsToRemove.Caption = "Friends to remove: " & friendsToRemove
   
-  With chiefPacket
-    .InsertNTString "/friends remove " & frnd
-    lstFriendsList.RemoveItem (lstFriendsList.ListIndex)
-    .sendChiefPacket &HE
-  End With
-  chiefData.removeFriend frnd
-  
-  cmdRemoveFriend.Enabled = False
-  friendsToRemove = friendsToRemove - 1
-  lblFriendsToRemove.Caption = "Friends to remove: " & friendsToRemove
-  
-  If friendsToRemove = 0 Then
-    btnContinue.Enabled = True
-  Else
-    tmrEnableButton.Enabled = True
-  End If
+    If friendsToRemove = 0 Then
+        btnContinue.Enabled = True
+    Else
+        tmrEnableButton.Enabled = True
+    End If
 End Sub
 
 Private Sub Form_Load()
-  cleanClose = False
+    cleanClose = False
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-  If cleanClose Then Exit Sub
+    If cleanClose Then Exit Sub
 
-  Dim msgBoxResult As Integer
-  msgBoxResult = MsgBox("Are you sure you want to do that?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
+    Dim msgBoxResult As Integer
+    msgBoxResult = MsgBox("Are you sure you want to do that?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
   
-  If msgBoxResult = vbNo Then
-    Cancel = 1
-  Else
-    resetAll
-  End If
+    If msgBoxResult = vbNo Then
+        Cancel = 1
+    Else
+        resetAll
+    End If
 End Sub
 
 Private Sub tmrEnableButton_Timer()
-  cmdRemoveFriend.Enabled = True
-  tmrEnableButton.Enabled = False
+    cmdRemoveFriend.Enabled = True
+    tmrEnableButton.Enabled = False
 End Sub

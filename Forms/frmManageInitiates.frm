@@ -164,110 +164,110 @@ Attribute VB_Exposed = False
 Private clickedUsername As String
 
 Private Sub btnClose_Click()
-  Unload Me
+    Unload Me
 End Sub
 
 Private Sub btnAdd_Click()
-  Dim str As String
+    Dim str As String
   
-  If txtUsername.text = vbNullString Or txtPassword.text = vbNullString Then
-    MsgBox "Username and Password must not be blank.", vbOKOnly Or vbInformation, PROGRAM_TITLE
-    Exit Sub
-  End If
+    If txtUsername.text = vbNullString Or txtPassword.text = vbNullString Then
+        MsgBox "Username and Password must not be blank.", vbOKOnly Or vbInformation, PROGRAM_TITLE
+        Exit Sub
+    End If
   
-  If Len(txtUsername.text) < 3 Then
-    MsgBox "Username must be 3 characters or more.", vbOKOnly Or vbInformation, PROGRAM_TITLE
-    Exit Sub
-  End If
+    If Len(txtUsername.text) < 3 Then
+        MsgBox "Username must be 3 characters or more.", vbOKOnly Or vbInformation, PROGRAM_TITLE
+        Exit Sub
+    End If
   
-  If Not initiateManager.addCustomInitiate(txtUsername.text, txtPassword.text) Then
-    MsgBox "That initiate is already on the initiate list!", vbOKOnly Or vbExclamation, PROGRAM_TITLE
-    Exit Sub
-  End If
+    If Not initiateManager.addCustomInitiate(txtUsername.text, txtPassword.text) Then
+        MsgBox "That initiate is already on the initiate list!", vbOKOnly Or vbExclamation, PROGRAM_TITLE
+        Exit Sub
+    End If
   
-  lstInitiates.AddItem txtUsername.text
+    lstInitiates.AddItem txtUsername.text
   
-  txtUsername.text = vbNullString
-  txtPassword.text = vbNullString
+    txtUsername.text = vbNullString
+    txtPassword.text = vbNullString
 End Sub
 
 Private Sub btnRemove_Click()
-  Dim username As String, initiateArray() As String
-
-  If lstInitiates.List(lstInitiates.ListIndex) = vbNullString Then Exit Sub
-  username = lstInitiates.List(lstInitiates.ListIndex)
-  lstInitiates.RemoveItem lstInitiates.ListIndex
-  
-  initiateManager.removeInitiate username
-  
-  txtUsername.text = ""
-  txtPassword.text = ""
-  
-  btnUpdate.Enabled = False
-  btnAdd.Enabled = True
+    Dim username As String, initiateArray() As String
+    
+    If lstInitiates.List(lstInitiates.ListIndex) = vbNullString Then Exit Sub
+    username = lstInitiates.List(lstInitiates.ListIndex)
+    lstInitiates.RemoveItem lstInitiates.ListIndex
+    
+    initiateManager.removeInitiate username
+    
+    txtUsername.text = ""
+    txtPassword.text = ""
+    
+    btnUpdate.Enabled = False
+    btnAdd.Enabled = True
 End Sub
 
 Private Sub btnUpdate_Click()
-  initiateManager.updateInitiate txtUsername.text, txtPassword.text
-  
-  btnUpdate.Enabled = False
-  btnAdd.Enabled = True
-  
-  txtUsername.text = ""
-  txtPassword.text = ""
+    initiateManager.updateInitiate txtUsername.text, txtPassword.text
+    
+    btnUpdate.Enabled = False
+    btnAdd.Enabled = True
+    
+    txtUsername.text = ""
+    txtPassword.text = ""
 End Sub
 
 Private Sub Form_Load()
-  Dim accounts() As New clsAccount
-  accounts = initiateManager.getInitiates()
-  
-  For i = 0 To UBound(accounts)
-    If accounts(i).getUsername() <> "" Then
-      lstInitiates.AddItem accounts(i).getUsername()
-    End If
-  Next i
+    Dim accounts() As New clsAccount
+    accounts = initiateManager.getInitiates()
+    
+    For i = 0 To UBound(accounts)
+        If accounts(i).getUsername() <> "" Then
+            lstInitiates.AddItem accounts(i).getUsername()
+        End If
+    Next i
 End Sub
 
 Private Sub lstInitiates_Click()
-  Dim username As String
-  username = lstInitiates.List(lstInitiates.ListIndex)
+    Dim username As String
+    username = lstInitiates.List(lstInitiates.ListIndex)
   
-  If username = clickedUsername Then
-    Exit Sub
-  End If
+    If username = clickedUsername Then
+        Exit Sub
+    End If
 
-  btnUpdate.Enabled = False
-  btnAdd.Enabled = True
+    btnUpdate.Enabled = False
+    btnAdd.Enabled = True
   
-  txtUsername.text = ""
-  txtPassword.text = ""
+    txtUsername.text = ""
+    txtPassword.text = ""
 End Sub
 
 Private Sub lstInitiates_DblClick()
-  Dim username As String
-  username = lstInitiates.List(lstInitiates.ListIndex)
+    Dim username As String
+    username = lstInitiates.List(lstInitiates.ListIndex)
   
-  If username = "" Then
-    Exit Sub
-  End If
+    If username = "" Then
+        Exit Sub
+    End If
   
-  clickedUsername = username
-  btnUpdate.Enabled = True
-  btnAdd.Enabled = False
+    clickedUsername = username
+    btnUpdate.Enabled = True
+    btnAdd.Enabled = False
   
-  Dim acc As clsAccount
-  Set acc = initiateManager.getAccountByName(username)
+    Dim acc As clsAccount
+    Set acc = initiateManager.getAccountByName(username)
   
-  txtUsername.text = acc.getUsername()
-  txtPassword.text = acc.getPassword()
+    txtUsername.text = acc.getUsername()
+    txtPassword.text = acc.getPassword()
   
-  txtPassword.SelStart = 0
-  txtPassword.SelLength = Len(txtPassword.text)
-  txtPassword.SetFocus
+    txtPassword.SelStart = 0
+    txtPassword.SelLength = Len(txtPassword.text)
+    txtPassword.SetFocus
 End Sub
 
 Private Sub txtUsername_Click()
-  btnUpdate.Enabled = False
-  btnAdd.Enabled = True
+    btnUpdate.Enabled = False
+    btnAdd.Enabled = True
 End Sub
 

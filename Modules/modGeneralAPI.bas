@@ -10,8 +10,8 @@ Public Declare Function SetProcessWorkingSetSize Lib "Kernel32" (ByVal hProcess 
 Public Function ews_memory() As Long:   ews_memory = EmptyWorkingSet(GetCurrentProcess):                  End Function
 Public Function spw_memory() As Long:   spw_memory = SetProcessWorkingSetSize(GetCurrentProcess, -1, -1): End Function
 Public Sub FreeMemory()
-  ews_memory
-  spw_memory
+    ews_memory
+    spw_memory
 End Sub
 
 

@@ -44,51 +44,51 @@ Public chiefData As New clsChieftainData
 Public clannedKeyCheckClan As String
 
 Public Enum KeyType
-  BAD
-  IN_USE
-  CLANNED
+    BAD
+    IN_USE
+    CLANNED
 End Enum
 
 Public Type ConfigType
-  server As String
-  bnlsServer As String
-  timeOut As Long
-  reconnectTime As Integer
-  verByte As Long
-  initiate As String
-  connectsPerProxy As Integer
-  initiatePassword As String
-  Channel As String
-  clanTag As String
-  clanDescription As String
-  saveClanInfo As Boolean
-  useCustomInitiates As Boolean
-  
-  rememberWindowPosition As Boolean
-  windowTop As Integer
-  windowLeft As Integer
+    server As String
+    bnlsServer As String
+    timeOut As Long
+    reconnectTime As Integer
+    verByte As Long
+    initiate As String
+    connectsPerProxy As Integer
+    initiatePassword As String
+    Channel As String
+    clanTag As String
+    clanDescription As String
+    saveClanInfo As Boolean
+    useCustomInitiates As Boolean
+    
+    rememberWindowPosition As Boolean
+    windowTop As Integer
+    windowLeft As Integer
 End Type
 Public config As ConfigType
 
 Public Type ClientData
-  username As String
-  password As String
-  key As String
-  proxyVersion As String
-  keyIndex As String
-  hasRestrictedKey As Boolean
-  
-  hasChieftainAsFriend As Boolean
-  hasCheckedFriendsList As Boolean
-  
-  proxyIP As String
-  proxyPort As Long
-  
-  nls_P As Long
-  
-  isReadyForPreparation As Boolean
-  hasDoneProcedure As Boolean
-  loggedOn As Boolean
+    username As String
+    password As String
+    key As String
+    proxyVersion As String
+    keyIndex As String
+    hasRestrictedKey As Boolean
+    
+    hasChieftainAsFriend As Boolean
+    hasCheckedFriendsList As Boolean
+    
+    proxyIP As String
+    proxyPort As Long
+    
+    nls_P As Long
+    
+    isReadyForPreparation As Boolean
+    hasDoneProcedure As Boolean
+    loggedOn As Boolean
 End Type
 Public bot() As ClientData
 Public chief As ClientData

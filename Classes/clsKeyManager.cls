@@ -15,35 +15,35 @@ Private dicKeys As Dictionary
 Private keyIdx As Long
 
 Private Sub Class_Initialize()
-  keyIdx = 0
-  Set dicKeys = New Dictionary
+    keyIdx = 0
+    Set dicKeys = New Dictionary
 End Sub
 
 Public Sub addKey(ByVal key As String)
-  dicKeys.Add dicKeys.count, key
+    dicKeys.Add dicKeys.count, key
 End Sub
 
 Public Sub removeKey(ByVal idx As Long)
-  dicKeys.Item(idx) = vbNullString
+    dicKeys.Item(idx) = vbNullString
 End Sub
 
 Public Function getKeyByIndex(ByVal idx As Long) As String
-  getKeyByIndex = dicKeys.Item(idx)
+    getKeyByIndex = dicKeys.Item(idx)
 End Function
 
 Public Function getKey(ByRef keyIndex As Long) As String
-  If (keyIdx <= dicKeys.count) Then
-    getKey = dicKeys.Item(keyIdx)
-    keyIndex = keyIdx
-    keyIdx = keyIdx + 1
-  End If
+    If (keyIdx <= dicKeys.count) Then
+        getKey = dicKeys.Item(keyIdx)
+        keyIndex = keyIdx
+        keyIdx = keyIdx + 1
+    End If
 End Function
 
 Public Sub resetKeys()
-  keyIdx = 0
-  dicKeys.RemoveAll
+    keyIdx = 0
+    dicKeys.RemoveAll
 End Sub
 
 Public Function getCount() As Long
-  getCount = dicKeys.count
+    getCount = dicKeys.count
 End Function

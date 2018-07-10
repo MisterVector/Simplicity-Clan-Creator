@@ -18,19 +18,19 @@ Public Sub initialize()
 End Sub
 
 Public Sub setUsername(user As String)
-  username = user
+    username = user
 End Sub
 
 Public Function getUsername() As String
-  getUsername = username
+    getUsername = username
 End Function
 
 Public Sub setPassword(pass As String)
-  password = pass
+    password = pass
 End Sub
 
 Public Function getPassword() As String
-  getPassword = password
+    getPassword = password
 End Function
 
 

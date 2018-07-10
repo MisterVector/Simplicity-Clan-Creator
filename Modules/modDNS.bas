@@ -1,8 +1,8 @@
 Attribute VB_Name = "modDNS"
 Private Declare Function DnsQuery Lib "dnsapi" Alias "DnsQuery_A" (ByVal strname As String, ByVal wType As Integer, ByVal fOptions As Long, ByVal pServers As Long, ppQueryResultsSet As Long, ByVal pReserved As Long) As Long
 Private Declare Function DnsRecordListFree Lib "dnsapi" (ByVal pDnsRecord As Long, ByVal FreeType As Long) As Long
-Private Declare Function lstrlen Lib "kernel32" (ByVal straddress As Long) As Long
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, ByVal Source As Long, ByVal Length As Long)
+Private Declare Function lstrlen Lib "Kernel32" (ByVal straddress As Long) As Long
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, ByVal Source As Long, ByVal Length As Long)
 Private Declare Function inet_ntoa Lib "ws2_32.dll" (ByVal pIP As Long) As Long
 Private Declare Function inet_addr Lib "ws2_32.dll" (ByVal sAddr As String) As Long
 
@@ -24,8 +24,8 @@ End Type
 
 Public Function Resolve(sAddr As String) As String
     If IsNumeric(Replace(sAddr, ".", "")) Then
-      Resolve = sAddr
-      Exit Function
+        Resolve = sAddr
+        Exit Function
     End If
     
     Dim pRecord     As Long
@@ -39,19 +39,25 @@ Public Function Resolve(sAddr As String) As String
 
     If DnsQuery(sAddr, DNS_TYPE_A, DNS_QUERY_BYPASS_CACHE, pServers, pRecord, 0) = 0 Then
         pNext = pRecord
+        
         Do While pNext <> 0
             Call CopyMemory(uRecord, pNext, Len(uRecord))
+            
             If uRecord.wType = DNS_TYPE_A Then
                 lPtr = inet_ntoa(uRecord.prt)
                 sName = String(lstrlen(lPtr), 0)
                 Call CopyMemory(ByVal sName, lPtr, Len(sName))
+                
                 If LenB(Resolve) <> 0 Then
                     Resolve = Resolve & " "
                 End If
+                
                 Resolve = Resolve & sName
             End If
+            
             pNext = uRecord.pNext
         Loop
+        
         Call DnsRecordListFree(pRecord, DnsFreeRecordList)
     End If
 End Function
