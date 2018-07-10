@@ -64,7 +64,7 @@ Public Sub Chief_Send0x51(clientToken As Long, serverToken As Long, MPQFileN As 
   Dim PubVal    As Long
   
   If (decode_hash_cdkey(chief.key, clientToken, serverToken, PubVal, ProdVal, CDKeyHash) = 0) Then
-    MsgBox "Unable to decode your CD-Keys.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "Unable to decode your CD-Keys.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     Unload All
 
     Exit Sub
@@ -174,14 +174,14 @@ Public Sub Chief_Send0x53()
   chief.nls_P = nls_init(chief.username, chief.password)
 
   If chief.nls_P = 0 Then
-    MsgBox "NLS made a bad call.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "NLS made a bad call.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     unloadAll
     Exit Sub
   End If
 
   nls_A = Space(Len(chief.username) + 33)
   If (nls_account_logon(chief.nls_P, nls_A) = 0) Then
-    MsgBox "Unable to create NLS key.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "Unable to create NLS key.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     
     unloadAll
     Exit Sub
@@ -206,7 +206,7 @@ Public Sub Chief_Send0x52()
   Dim SaltHash As String: SaltHash = Space(Len(chief.username) + 65)
 
   If (nls_account_create(chief.nls_P, SaltHash) = 0) Then
-    MsgBox "Unable to create NLS salt.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "Unable to create NLS salt.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     Exit Sub
   End If
 

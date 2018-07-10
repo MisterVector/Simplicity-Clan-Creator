@@ -598,37 +598,37 @@ Private Sub btnCheckClanned_Click()
   Dim blClanCreation As Boolean
 
   If Len(txtInitiate.text) > 14 Or Len(txtInitiate.text) < 2 Then
-    MsgBox "The initiate name must be between 2 to 14 characters.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "The initiate name must be between 2 to 14 characters.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
 
   If Len(txtChief.text) > 15 Or Len(txtChief.text) < 3 Then
-    MsgBox "The chief's name must be from 3 to 15 characters long.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "The chief's name must be from 3 to 15 characters long.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
 
   If Len(txtChiefPass.text) = 0 Then
-    MsgBox "Enter a password for the chief.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Enter a password for the chief.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
   If Len(txtInitiatesPassword.text) = 0 Then
-    MsgBox "Enter a password for the initiates.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Enter a password for the initiates.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
 
   If Not IsNumeric(txtReconnectTime.text) Then
-    MsgBox "You must enter a numerical value for the reconnect time.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "You must enter a numerical value for the reconnect time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
   If Not IsNumeric(txtTimeOut.text) Then
-    MsgBox "You must enter a numerical value for the time out time.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "You must enter a numerical value for the time out time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
   If (cmbServer.text = vbNullString) Then
-    MsgBox "You must enter a Battle.Net server to connect to.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "You must enter a Battle.Net server to connect to.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
@@ -708,7 +708,7 @@ Private Sub btnCheckClanned_Click()
       bot(i).keyIndex = kIdx
       
       If bot(i).key = vbNullString Then
-        MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly & vbExclamation, PROGRAM_TITLE
+        MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
         
         resetAll
         Exit Sub
@@ -746,7 +746,7 @@ Private Sub btnCheckClanned_Click()
     chief.keyIndex = kIdx
       
     If chief.key = vbNullString Then
-      MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly & vbExclamation, PROGRAM_TITLE
+      MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
       
       resetAll
       Exit Sub
@@ -766,12 +766,12 @@ Private Sub btnCheckClanTag_Click()
   Dim blCreateClan As Boolean
 
   If Not isValidClanTag(txtClanTag.text) Then
-    MsgBox "Clan tag must be between 2-4 alphanumeric characters.", vbOKOnly & vbExclamation, PROGRAM_TITLE
+    MsgBox "Clan tag must be between 2-4 alphanumeric characters.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
     Exit Sub
   End If
 
   If (txtClanDescription.text = vbNullString) Then
-    blCreateClan = MsgBox("Really create the clan without a description?", vbYesNo & vbQuestion, PROGRAM_TITLE)
+    blCreateClan = MsgBox("Really create the clan without a description?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
     
     If blCreateClan = vbNo Then Exit Sub
   End If
@@ -865,7 +865,7 @@ Private Sub Form_Load()
   End If
   
   If (Dir(App.path & "\WAR3\Warcraft III.exe") = vbNullString) Then
-    MsgBox "Place Warcraft III.exe in the WAR3 folder, then run this program again.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Place Warcraft III.exe in the WAR3 folder, then run this program again.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     unloadAll
     Exit Sub
   End If
@@ -891,7 +891,7 @@ Private Sub Form_Load()
   
   If Dir(App.path & "\CD-Keys.txt") = vbNullString Then
     MsgBox "No CD-Keys.txt file found. It will be created for you." & vbNewLine _
-         & "Place your Warcraft III keys inside of it.", vbOKOnly & vbInformation, PROGRAM_TITLE
+         & "Place your Warcraft III keys inside of it.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     
     Open App.path & "\CD-Keys.txt" For Output As #1
     Close #1
@@ -1160,7 +1160,7 @@ Private Sub tmrQueue_Timer()
   If chiefData.getFriendsCount() = 25 Then
     tmrQueue.Enabled = False
     
-    MsgBox "Chief's friends list is full. You need to remove some friends to continue.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Chief's friends list is full. You need to remove some friends to continue.", vbOKOnly Or vbInformation, PROGRAM_TITLE
       
     Dim friendsExcludeInitiates As Integer
     friendsExcludeInitiates = chiefData.getFriendsWithoutInitiatesCount()

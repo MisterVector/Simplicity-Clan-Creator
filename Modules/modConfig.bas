@@ -122,7 +122,7 @@ Public Sub loadConfig()
   If err.Number > 0 Then
     err.Clear
     
-    MsgBox "Errors were encountered while loading. The affected values have been set to their defaults.", vbOKOnly & vbExclamation, PROGRAM_TITLE
+    MsgBox "Errors were encountered while loading. The affected values have been set to their defaults.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
   End If
 End Sub
 

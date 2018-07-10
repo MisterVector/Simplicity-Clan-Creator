@@ -171,17 +171,17 @@ Private Sub btnAdd_Click()
   Dim str As String
   
   If txtUsername.text = vbNullString Or txtPassword.text = vbNullString Then
-    MsgBox "Username and Password must not be blank.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Username and Password must not be blank.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
   If Len(txtUsername.text) < 3 Then
-    MsgBox "Username must be 3 characters or more.", vbOKOnly & vbInformation, PROGRAM_TITLE
+    MsgBox "Username must be 3 characters or more.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     Exit Sub
   End If
   
   If Not initiateManager.addCustomInitiate(txtUsername.text, txtPassword.text) Then
-    MsgBox "That initiate is already on the initiate list!", vbOKOnly & vbExclamation, PROGRAM_TITLE
+    MsgBox "That initiate is already on the initiate list!", vbOKOnly Or vbExclamation, PROGRAM_TITLE
     Exit Sub
   End If
   

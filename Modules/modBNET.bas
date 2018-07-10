@@ -64,7 +64,7 @@ Public Sub Send0x51(index As Integer, clientToken As Long, serverToken As Long, 
   Dim PubVal    As Long
   
   If (decode_hash_cdkey(bot(index).key, clientToken, serverToken, PubVal, ProdVal, CDKeyHash) = 0) Then
-    MsgBox "Unable to decode your CD-Keys.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "Unable to decode your CD-Keys.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     Unload All
 
     Exit Sub
@@ -176,14 +176,14 @@ Public Sub Send0x53(index As Integer)
   bot(index).nls_P = nls_init(bot(index).username, bot(index).password)
 
   If bot(index).nls_P = 0 Then
-    MsgBox "NLS made a bad call.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "NLS made a bad call.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     unloadAll
     Exit Sub
   End If
 
   nls_A = Space(Len(bot(index).username) + 33)
   If (nls_account_logon(bot(index).nls_P, nls_A) = 0) Then
-    MsgBox "Unable to create NLS key.", vbOKOnly & vbCritical, PROGRAM_TITLE
+    MsgBox "Unable to create NLS key.", vbOKOnly Or vbCritical, PROGRAM_TITLE
     
     unloadAll
     Exit Sub
@@ -208,7 +208,7 @@ Public Sub Send0x52(index As Integer)
   Dim SaltHash As String: SaltHash = Space(Len(bot(index).username) + 65)
 
   If (nls_account_create(bot(index).nls_P, SaltHash) = 0) Then
-    MsgBox "Unable to create NLS salt.", vbOKOnly & vbCritical, PROGRAM_TITLE  'Unable to create salt
+    MsgBox "Unable to create NLS salt.", vbOKOnly Or vbCritical, PROGRAM_TITLE  'Unable to create salt
     Exit Sub
   End If
 

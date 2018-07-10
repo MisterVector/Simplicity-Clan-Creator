@@ -143,7 +143,7 @@ Private Sub Form_Unload(Cancel As Integer)
   If cleanClose Then Exit Sub
 
   Dim msgBoxResult As Integer
-  msgBoxResult = MsgBox("Are you sure you want to do that?", vbYesNo & vbQuestion, PROGRAM_TITLE)
+  msgBoxResult = MsgBox("Are you sure you want to do that?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
   
   If msgBoxResult = vbNo Then
     Cancel = 1
