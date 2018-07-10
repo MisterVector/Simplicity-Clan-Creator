@@ -253,7 +253,7 @@ Public Sub Recv0x54(index As Integer)
       AddChat vbRed, "Initiate #" & index & ": Invalid password for " & bot(index).username & "."
       
       Dim acc As New clsAccount
-      Set acc = modOtherCode.generateInitiate()
+      Set acc = generateInitiate()
       
       bot(index).username = acc.getUsername()
       bot(index).password = acc.getPassword()
@@ -366,7 +366,7 @@ Public Sub Recv0x70(index As Integer)
       AddChat vbRed, "Initiate #" & index & ": This initiate is part of a clan. Reconnecting with a new name..."
       
       Dim acc As New clsAccount
-      Set acc = modOtherCode.generateInitiate()
+      Set acc = generateInitiate()
       
       bot(index).username = acc.getUsername()
       bot(index).password = acc.getPassword()

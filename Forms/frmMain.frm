@@ -697,7 +697,7 @@ Private Sub btnCheckClanned_Click()
 
     If changeInitiateName Then
       Dim acc As clsAccount
-      Set acc = modOtherCode.generateInitiate()
+      Set acc = generateInitiate()
       
       bot(i).username = acc.getUsername()
       bot(i).password = acc.getPassword()
@@ -1139,7 +1139,7 @@ Private Sub sckUpdateCheck_DataArrival(ByVal bytesTotal As Long)
 
   updateString = updateString & data
 
-  tmrUpdate.Enabled = True
+  tmrCheckUpdate.Enabled = True
 End Sub
 
 Private Sub sckUpdateCheck_Error(ByVal Number As Integer, Description As String, ByVal Scode As Long, ByVal Source As String, ByVal HelpFile As String, ByVal HelpContext As Long, CancelDisplay As Boolean)
@@ -1211,7 +1211,7 @@ Public Sub checkUpdate()
   sckUpdateCheck.Connect "files.codespeak.org", 80
 End Sub
 
-Private Sub tmrUpdate_Timer()
+Private Sub tmrCheckUpdate_Timer()
   On Error GoTo err
   
   Dim ver As String
@@ -1231,7 +1231,7 @@ err:
   End If
 
   updateString = vbNullString
-  tmrUpdate.Enabled = False
+  tmrCheckUpdate.Enabled = False
 End Sub
 
 Public Sub initiateError(ByVal index As Integer)
