@@ -587,6 +587,12 @@ Begin VB.Form frmMain
       Begin VB.Menu mnuAbout 
          Caption         =   "About"
       End
+      Begin VB.Menu mnuSep1 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuCheckForUpdates 
+         Caption         =   "Check for Updates"
+      End
    End
 End
 Attribute VB_Name = "frmMain"
@@ -939,8 +945,6 @@ Private Sub Form_Load()
   Set chiefPacket = New clsPacket
   
   programLoaded = True
-
-  checkUpdate
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -979,6 +983,12 @@ End Sub
 
 Private Sub mnuAbout_Click()
     frmAbout.Show
+End Sub
+
+Private Sub mnuCheckForUpdates_Click()
+  If (sckUpdateCheck.State = sckClosed) Then
+    sckUpdateCheck.Connect "files.codespeak.org", 80
+  End If
 End Sub
 
 Private Sub mnuQuit_Click()
@@ -1143,8 +1153,8 @@ Private Sub sckUpdateCheck_DataArrival(ByVal bytesTotal As Long)
 End Sub
 
 Private Sub sckUpdateCheck_Error(ByVal Number As Integer, Description As String, ByVal Scode As Long, ByVal Source As String, ByVal HelpFile As String, ByVal HelpContext As Long, CancelDisplay As Boolean)
-  sckUpdateCheck.Close
   AddChat vbRed, "Unable to check for update!"
+  sckUpdateCheck.Close
 End Sub
 
 Private Sub tmrChiefReconnect_Timer()
@@ -1207,10 +1217,6 @@ Private Sub tmrInitiateTimeout_Timer(index As Integer)
   initiateError index
 End Sub
 
-Public Sub checkUpdate()
-  sckUpdateCheck.Connect "files.codespeak.org", 80
-End Sub
-
 Private Sub tmrCheckUpdate_Timer()
   On Error GoTo err
   
@@ -1227,8 +1233,9 @@ Private Sub tmrCheckUpdate_Timer()
     If (msgBoxResult = vbYes) Then
         ShellExecute 0, "open", RELEASES_URL, vbNullString, vbNullString, 4
     End If
+  Else
+    MsgBox "There is no new version at this time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
   End If
-  
 err:
   If err.Number > 0 Then
     err.Clear
@@ -1237,6 +1244,7 @@ err:
 
   updateString = vbNullString
   tmrCheckUpdate.Enabled = False
+  sckUpdateCheck.Close
 End Sub
 
 Public Sub initiateError(ByVal index As Integer)
