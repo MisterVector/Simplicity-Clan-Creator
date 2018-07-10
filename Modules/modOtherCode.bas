@@ -218,7 +218,7 @@ End Sub
 
 Public Sub reconnectInitiate(ByVal index As Integer)
   Dim IP As String, Port As Long
-  Dim version As String
+  Dim Version As String
   
   Do
     Dim proxy As ProxyData
@@ -227,7 +227,7 @@ Public Sub reconnectInitiate(ByVal index As Integer)
     With proxy
       IP = .IP
       Port = .Port
-      version = .version
+      Version = .Version
     End With
     
     If IP = vbNullString Then
@@ -240,7 +240,7 @@ Public Sub reconnectInitiate(ByVal index As Integer)
   With bot(index)
     .proxyIP = IP
     .proxyPort = Port
-    .proxyVersion = version
+    .proxyVersion = Version
   End With
   
   frmMain.sckClanMembers(index).Connect IP, Port

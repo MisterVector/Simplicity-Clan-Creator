@@ -818,9 +818,9 @@ Private Sub cmdResetProxies_Click()
 End Sub
 
 Private Sub Form_Load()
-  Me.Caption = Replace(Me.Caption, "%v", Version)
+  Me.Caption = Replace(Me.Caption, "%v", PROGRAM_VERSION)
   
-  AddChat vbYellow, "Welcome to Simplicity Clan Creator v" & Version & " by Vector"
+  AddChat vbYellow, "Welcome to Simplicity Clan Creator v" & PROGRAM_VERSION & " by Vector"
   
   Hashes(0) = App.path & "\WAR3\Warcraft III.exe"
 
@@ -1119,7 +1119,7 @@ End Sub
 
 Private Sub sckUpdateCheck_Connect()
   sckUpdateCheck.SendData "GET /projects/simplicity/Version.txt HTTP/1.1" & vbCrLf _
-                          & "User-Agent: Simplicity/" & Version & vbCrLf _
+                          & "User-Agent: Simplicity/" & PROGRAM_VERSION & vbCrLf _
                           & "Host: files.codespeak.org" & vbCrLf & vbCrLf
 End Sub
 
@@ -1207,9 +1207,9 @@ Private Sub tmrUpdate_Timer()
   
   ver = Split(updateString, "Content-Type: text/plain" & vbCrLf & vbCrLf)(1)
 
-  If ver > Version Then
+  If ver > PROGRAM_VERSION Then
     AddChat vbCyan, "NEW VERSION UPDATE!!!", vbYellow, " There is a new version available."
-    AddChat vbWhite, "Your version: " & Version & ". New version: " & ver
+    AddChat vbWhite, "Your version: " & PROGRAM_VERSION & ". New version: " & ver
     AddChat vbYellow, "To download a newer version, see files.codespeak.org/projects/simplicity"
   End If
   

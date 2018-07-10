@@ -1,14 +1,14 @@
 Attribute VB_Name = "modVars"
-Public Const Version As String = "1.2"
-Public Const PROGRAM_TITLE As String = "Simplicity v" & Version & " by Vector"
+Public Const PROGRAM_VERSION                  As String = "1.2"
+Public Const PROGRAM_TITLE                    As String = "Simplicity v" & PROGRAM_VERSION & " by Vector"
 
-Public Const DEFAULT_SERVER As String = "useast.battle.net"
-Public Const DEFAULT_BNLS_SERVER As String = "jbls.codespeak.org"
-Public Const DEFAULT_CHANNEL As String = "Simplicity"
-Public Const DEFAULT_CONNECTIONS_PER_PROXY As Integer = 4
-Public Const DEFAULT_TIMEOUT As Integer = 10000
-Public Const DEFAULT_RECONNECT_TIME As Integer = 12000
-Public Const DEFAULT_VERSION_BYTE As Long = &H1D
+Public Const DEFAULT_SERVER                   As String = "useast.battle.net"
+Public Const DEFAULT_BNLS_SERVER              As String = "jbls.codespeak.org"
+Public Const DEFAULT_CHANNEL                  As String = "Simplicity"
+Public Const DEFAULT_CONNECTIONS_PER_PROXY    As Integer = 4
+Public Const DEFAULT_TIMEOUT                  As Integer = 10000
+Public Const DEFAULT_RECONNECT_TIME           As Integer = 12000
+Public Const DEFAULT_VERSION_BYTE             As Long = &H1D
 
 Public Const DEFAULT_REMEMBER_WINDOW_POSITION As Boolean = False
 
