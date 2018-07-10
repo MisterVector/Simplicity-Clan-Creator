@@ -25,6 +25,7 @@ Module=modBNLS; Modules\modBNLS.bas
 Module=modFiletime; Modules\modFiletime.bas
 Module=modClanFunctions; Modules\modClanFunctions.bas
 Form=Forms\frmAbout.frm
+Module=modGeneralAPI; Modules\modGeneralAPI.bas
 IconForm="frmMain"
 Startup="frmMain"
 HelpFile=""
