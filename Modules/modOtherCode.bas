@@ -1,6 +1,7 @@
 Attribute VB_Name = "modOtherCode"
 Public Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (lpvDest As Any, lpvSource As Any, ByVal cbCopy As Long)
 Public Declare Function GetTickCount Lib "kernel32.dll" () As Long
+Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpszOp As String, ByVal lpszFile As String, ByVal lpszParams As String, ByVal LpszDir As String, ByVal FsShowCmd As Long) As Long
 Public Declare Function GetCurrentProcess Lib "Kernel32" () As Long
 Public Declare Function EmptyWorkingSet Lib "psapi.dll" (ByVal hProcess As Long) As Long
 Public Declare Function SetProcessWorkingSetSize Lib "Kernel32" (ByVal hProcess As Long, ByVal dwMinimumWorkingSetSize As Long _
