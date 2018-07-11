@@ -31,9 +31,9 @@ Public connectedCount As Integer
 
 Public Hashes(0) As String
 Public isCheckingClanTag As Boolean
-Public Packet() As clsPacket
-Public bnlsPacket As clsPacket
-Public chiefPacket As clsPacket
+Public Packet() As clsPacketHandler
+Public bnlsPacketHandler As clsPacketHandler
+Public chiefPacketHandler As clsPacketHandler
 Public programLoaded As Boolean
 Public isCreatingClan As Boolean
 Public attemptedVerByteUpdate As Boolean
@@ -47,6 +47,11 @@ Public Enum KeyType
     BAD
     IN_USE
     CLANNED
+End Enum
+
+Public Enum packetType
+    BNCS
+    BNLS
 End Enum
 
 Public Type ConfigType

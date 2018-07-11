@@ -1,20 +1,20 @@
 Attribute VB_Name = "modBNLS"
 Public Sub SEND_BNLS_0x10()
-    With bnlsPacket
+    With bnlsPacketHandler
         .InsertDWORD &H7
-        .sendBNLSPacket &H10
+        .sendPacket &H10
     End With
 End Sub
 
 Public Sub RECV_BNLS_0x10()
     Dim product As Long
 
-    product = bnlsPacket.GetDWORD
+    product = bnlsPacketHandler.GetDWORD
   
     If (product <> 0) Then
         Dim verByte As Long
     
-        verByte = bnlsPacket.GetDWORD
+        verByte = bnlsPacketHandler.GetDWORD
   
         config.verByte = verByte
         WriteINI "Main", "VerByte", Hex(verByte), "Config.ini"

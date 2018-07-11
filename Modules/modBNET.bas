@@ -1,6 +1,6 @@
 Attribute VB_Name = "modBNET"
 Public Sub Send0x00(index As Integer)
-    Packet(index).sendPacket index, &H0
+    Packet(index).sendPacket &H0
 End Sub
 
 Public Sub Recv0x00(index As Integer)
@@ -14,7 +14,7 @@ End Sub
 Public Sub Send0x25(index As Integer)
     With Packet(index)
         .InsertDWORD .GetDWORD
-        .sendPacket index, &H25
+        .sendPacket &H25
     End With
 End Sub
 
@@ -30,7 +30,7 @@ Public Sub Send0x50(index As Integer)
         .InsertDWORD &H0
         .InsertNTString "USA"
         .InsertNTString "United States"
-        .sendPacket index, &H50
+        .sendPacket &H50
     End With
 End Sub
 
@@ -87,7 +87,7 @@ Public Sub Send0x51(index As Integer, clientToken As Long, serverToken As Long, 
         
         .InsertNTString KillNull(EXEInfo)
         .InsertNTString "Simplicity"
-        .sendPacket index, &H51
+        .sendPacket &H51
     End With
 End Sub
 
@@ -152,7 +152,7 @@ End Sub
 '// SID_NEWS
 Public Sub Send0x46(index As Integer)
     Packet(index).InsertDWORD &HFFFFFFFF
-    Packet(index).sendPacket index, &H46
+    Packet(index).sendPacket &H46
 End Sub
 
 '// SID_NEWS
@@ -192,7 +192,7 @@ Public Sub Send0x53(index As Integer)
 
     Packet(index).InsertNonNTString Left$(nls_A, Len(nls_A) - Len(bot(index).username) - 1)
     Packet(index).InsertNTString bot(index).username
-    Packet(index).sendPacket index, &H53
+    Packet(index).sendPacket &H53
 End Sub
 
 Public Sub Recv0x53(index As Integer)
@@ -214,7 +214,7 @@ Public Sub Send0x52(index As Integer)
     End If
 
     Packet(index).InsertNonNTString SaltHash
-    Packet(index).sendPacket index, &H52
+    Packet(index).sendPacket &H52
 End Sub
 
 Public Sub Recv0x52(index As Integer)
@@ -240,7 +240,7 @@ Public Sub Send0x54(index As Integer)
     nls_account_logon_proof bot(index).nls_P, ProofHash, ServerKey, Salt
 
     Packet(index).InsertNonNTString ProofHash
-    Packet(index).sendPacket index, &H54
+    Packet(index).sendPacket &H54
 End Sub
 
 Public Sub Recv0x54(index As Integer)
@@ -279,7 +279,7 @@ End Sub
 
 Public Sub Send0x65(index As Integer)
     With Packet(index)
-        .sendPacket index, &H65
+        .sendPacket &H65
     End With
 End Sub
 
@@ -318,7 +318,7 @@ Public Sub Send0x70(index As Integer)
     With Packet(index)
         .InsertDWORD &H0
         .InsertNonNTString StrReverse$(sendTag)
-        .sendPacket index, &H70
+        .sendPacket &H70
     End With
 End Sub
 
@@ -393,7 +393,7 @@ Public Sub Recv0x72(index As Integer)
         .InsertNonNTString clanTag
         .InsertNTString inviterName
         .InsertByte &H6
-        .sendPacket index, &H72
+        .sendPacket &H72
     End With
 End Sub
 
@@ -401,11 +401,11 @@ Public Sub Send0xAC(index As Integer)
     With Packet(index)
         .InsertNTString bot(index).username
         .InsertByte &H0
-        .sendPacket index, &HA
+        .sendPacket &HA
 
         .InsertDWORD &H2
         .InsertNTString config.Channel
-        .sendPacket index, &HC
+        .sendPacket &HC
     End With
 End Sub
 

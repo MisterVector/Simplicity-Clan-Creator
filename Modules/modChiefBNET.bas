@@ -1,6 +1,6 @@
 Attribute VB_Name = "modChiefBNET"
 Public Sub Chief_Send0x00()
-    chiefPacket.sendChiefPacket &H0
+    chiefPacketHandler.sendPacket &H0
 End Sub
 
 Public Sub Chief_Recv0x00()
@@ -8,9 +8,9 @@ Public Sub Chief_Recv0x00()
 End Sub
 
 Public Sub Chief_Send0x25()
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD .GetDWORD
-        .sendChiefPacket &H25
+        .sendPacket &H25
     End With
 End Sub
 
@@ -19,7 +19,7 @@ Public Sub Chief_Recv0x25()
 End Sub
 
 Public Sub Chief_Send0x50()
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD &H0
         .InsertNonNTString "68XI3RAW"
         .InsertDWORD config.verByte
@@ -30,7 +30,7 @@ Public Sub Chief_Send0x50()
         .InsertDWORD &H0
         .InsertNTString "USA"
         .InsertNTString "United States"
-        .sendChiefPacket &H50
+        .sendPacket &H50
     End With
 End Sub
 
@@ -39,18 +39,18 @@ Public Sub Chief_Recv0x50()
     Dim MPQFileN As String, valueString As String
     Dim FT As FILETIME, archiveTime As String
 
-    chiefPacket.Skip 4              'Logon type
+    chiefPacketHandler.Skip 4              'Logon type
   
     clientToken = GetTickCount
-    serverToken = chiefPacket.GetDWORD
-    chiefPacket.Skip 4    'UDPValue
+    serverToken = chiefPacketHandler.GetDWORD
+    chiefPacketHandler.Skip 4    'UDPValue
   
-    FT.dwLowDateTime = chiefPacket.GetDWORD
-    FT.dwHighDateTime = chiefPacket.GetDWORD
+    FT.dwLowDateTime = chiefPacketHandler.GetDWORD
+    FT.dwHighDateTime = chiefPacketHandler.GetDWORD
     archiveTime = GetFTTime(FT)
 
-    MPQFileN = chiefPacket.getNTString
-    valueString = chiefPacket.getNTString
+    MPQFileN = chiefPacketHandler.getNTString
+    valueString = chiefPacketHandler.getNTString
   
     Chief_Send0x51 clientToken, serverToken, MPQFileN, valueString, archiveTime
 End Sub
@@ -72,7 +72,7 @@ Public Sub Chief_Send0x51(clientToken As Long, serverToken As Long, MPQFileN As 
 
     check_revision archiveTime, MPQFileN, valueString, App.path & "\VersionCheck.ini", "WAR3", Version, Checksum, EXEInfo
   
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD clientToken
         .InsertDWORD Version
         .InsertDWORD Checksum
@@ -87,7 +87,7 @@ Public Sub Chief_Send0x51(clientToken As Long, serverToken As Long, MPQFileN As 
         
         .InsertNTString KillNull(EXEInfo)
         .InsertNTString "Simplicity"
-        .sendChiefPacket &H51
+        .sendPacket &H51
     End With
 End Sub
 
@@ -95,7 +95,7 @@ Public Sub Chief_Recv0x51()
     Dim statusCode As Long, keyIdx As Long
   
     frmMain.tmrChiefTimeout.Enabled = False
-    statusCode = chiefPacket.GetDWORD
+    statusCode = chiefPacketHandler.GetDWORD
   
     If statusCode = &H0 Then
         Chief_Send0x53
@@ -125,7 +125,7 @@ Public Sub Chief_Recv0x51()
                 resetAll
                 Exit Sub
             Case &H201
-                AddChat vbRed, "Chieftain: Your CD-Key is in use by " & chiefPacket.getNTString & "."
+                AddChat vbRed, "Chieftain: Your CD-Key is in use by " & chiefPacketHandler.getNTString & "."
                 addKey chief.keyIndex, chief.key, KeyType.IN_USE
             Case &H202, &H203
                 If statusCode = &H202 Then
@@ -150,15 +150,15 @@ Public Sub Chief_Recv0x51()
 End Sub
 
 Public Sub Chief_Send0x46()
-    chiefPacket.InsertDWORD &HFFFFFFFF
-    chiefPacket.sendChiefPacket &H46
+    chiefPacketHandler.InsertDWORD &HFFFFFFFF
+    chiefPacketHandler.sendPacket &H46
 End Sub
 
 Public Sub Chief_Recv0x46()
     Dim dumpedPacket As String
 
-    chiefPacket.Skip 13
-    dumpedPacket = chiefPacket.getPacket
+    chiefPacketHandler.Skip 13
+    dumpedPacket = chiefPacketHandler.getPacket
    
     If InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
             Or InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 Then
@@ -188,13 +188,13 @@ Public Sub Chief_Send0x53()
         Exit Sub
     End If
 
-    chiefPacket.InsertNonNTString Left$(nls_A, Len(nls_A) - Len(chief.username) - 1)
-    chiefPacket.InsertNTString chief.username
-    chiefPacket.sendChiefPacket &H53
+    chiefPacketHandler.InsertNonNTString Left$(nls_A, Len(nls_A) - Len(chief.username) - 1)
+    chiefPacketHandler.InsertNTString chief.username
+    chiefPacketHandler.sendPacket &H53
 End Sub
 
 Public Sub Chief_Recv0x53()
-    Select Case chiefPacket.GetDWORD
+    Select Case chiefPacketHandler.GetDWORD
         Case &H0: Chief_Send0x54   'Passed
         Case &H1: Chief_Send0x52   'Account Not made
         Case Else
@@ -211,14 +211,14 @@ Public Sub Chief_Send0x52()
         Exit Sub
     End If
 
-    chiefPacket.InsertNonNTString SaltHash
-    chiefPacket.sendChiefPacket &H52
+    chiefPacketHandler.InsertNonNTString SaltHash
+    chiefPacketHandler.sendPacket &H52
 End Sub
 
 Public Sub Chief_Recv0x52()
     Dim result As Long
   
-    result = chiefPacket.GetDWORD
+    result = chiefPacketHandler.GetDWORD
   
     If result = &H0 Then
         Chief_Send0x53
@@ -232,17 +232,17 @@ End Sub
 
 Public Sub Chief_Send0x54()
     Dim ProofHash As String * 20
-    Dim Salt      As String: Salt = chiefPacket.GetNonNTString(32)
-    Dim ServerKey As String: ServerKey = chiefPacket.GetNonNTString(32)
+    Dim Salt      As String: Salt = chiefPacketHandler.GetNonNTString(32)
+    Dim ServerKey As String: ServerKey = chiefPacketHandler.GetNonNTString(32)
 
     nls_account_logon_proof chief.nls_P, ProofHash, ServerKey, Salt
 
-    chiefPacket.InsertNonNTString ProofHash
-    chiefPacket.sendChiefPacket &H54
+    chiefPacketHandler.InsertNonNTString ProofHash
+    chiefPacketHandler.sendPacket &H54
 End Sub
 
 Public Sub Chief_Recv0x54()
-    Select Case chiefPacket.GetDWORD
+    Select Case chiefPacketHandler.GetDWORD
         Case &H0: GoTo Continue
         Case &H1:
         Case &H2: AddChat vbRed, "Chieftain: Invalid password for " & chief.username & "."
@@ -261,15 +261,15 @@ Continue:
 End Sub
 
 Public Sub Chief_Send0x65()
-    With chiefPacket
-        .sendChiefPacket &H65
+    With chiefPacketHandler
+        .sendPacket &H65
     End With
 End Sub
 
 Public Sub Chief_Recv0x65()
     Dim friendsCount As Integer, curFriend As String
   
-    With chiefPacket
+    With chiefPacketHandler
         friendsCount = .GetByte
 
         If friendsCount > 0 Then
@@ -293,10 +293,10 @@ Public Sub Chief_Send0x70()
         sendTag = sendTag & Chr$(Asc(Mid(clannedKeyCheckClan, i + 1, 1)))
     Next i
   
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD &H0
         .InsertNonNTString sendTag
-        .sendChiefPacket &H70
+        .sendPacket &H70
     End With
 End Sub
 
@@ -305,9 +305,9 @@ Public Sub Chief_Recv0x70()
     Dim tempInitiateList As New Dictionary
     Dim initiateCount As Byte, retryTagCheck As Boolean
     
-    chiefPacket.Skip 4
-    result = chiefPacket.GetByte
-    initiateCount = chiefPacket.GetByte
+    chiefPacketHandler.Skip 4
+    result = chiefPacketHandler.GetByte
+    initiateCount = chiefPacketHandler.GetByte
   
     Select Case result
         Case &H0
@@ -318,7 +318,7 @@ Public Sub Chief_Recv0x70()
                     ReDim acceptedInitiates(initiateCount)
 
                     For i = 1 To initiateCount
-                        acceptedInitiates(i) = chiefPacket.getNTString
+                        acceptedInitiates(i) = chiefPacketHandler.getNTString
                     Next i
 
                     For i = 0 To UBound(bot)
@@ -353,7 +353,7 @@ Public Sub Chief_Recv0x70()
                     Dim init As String
         
                     For i = 1 To initiateCount
-                        init = chiefPacket.getNTString
+                        init = chiefPacketHandler.getNTString
             
                         If isInitiate(init) Then
                             dicInitiatesAdded.Add init, init
@@ -414,8 +414,8 @@ End Sub
 Public Sub Chief_Recv0x71()
     Dim result As Long
 
-    chiefPacket.GetDWORD 'skip cookie
-    result = chiefPacket.GetDWORD
+    chiefPacketHandler.GetDWORD 'skip cookie
+    result = chiefPacketHandler.GetDWORD
   
     Select Case result
         Case &H0
@@ -449,31 +449,31 @@ Public Sub Chief_Recv0x72()
     Dim cookie As Long, clanTag As String
     Dim clanName As String, inviterName As String
   
-    With chiefPacket
+    With chiefPacketHandler
         cookie = .GetDWORD
         clanTag = .GetNonNTString(4)
         clanName = .getNTString
         inviterName = .getNTString
     End With
 
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD cookie
         .InsertNonNTString clanTag
         .InsertNTString inviterName
         .InsertByte &H6
-        .sendChiefPacket &H72
+        .sendPacket &H72
     End With
 End Sub
 
 Public Sub Chief_Send0xAC()
-    With chiefPacket
+    With chiefPacketHandler
         .InsertNTString chief.username
         .InsertByte &H0
-        .sendChiefPacket &HA
+        .sendPacket &HA
 
         .InsertDWORD &H2
         .InsertNTString config.Channel
-        .sendChiefPacket &HC
+        .sendPacket &HC
     End With
 End Sub
 

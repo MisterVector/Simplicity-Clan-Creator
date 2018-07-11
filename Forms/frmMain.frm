@@ -544,7 +544,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -927,7 +926,9 @@ Private Sub Form_Load()
     ReDim Packet(8)
     ReDim bot(8)
     Set Chieftain = New clsChieftainData
-    Set bnlsPacket = New clsPacket
+    Set bnlsPacketHandler = New clsPacketHandler
+    
+    bnlsPacketHandler.setup sckBNLS, packetType.BNLS
   
     For i = 0 To 8
         If i > 0 Then
@@ -936,14 +937,16 @@ Private Sub Form_Load()
             Load tmrReconnect(i)
         End If
     
-        Set Packet(i) = New clsPacket
+        Set Packet(i) = New clsPacketHandler
+        Packet(i).setup sckClanMembers(i), packetType.BNCS
         tmrInitiateTimeout(i).Interval = config.timeOut
         tmrReconnect(i).Interval = config.reconnectTime
     Next i
     
     tmrChiefTimeout.Interval = config.timeOut
     tmrChiefReconnect.Interval = config.reconnectTime
-    Set chiefPacket = New clsPacket
+    Set chiefPacketHandler = New clsPacketHandler
+    chiefPacketHandler.setup sckChieftain, packetType.BNCS
   
     programLoaded = True
 End Sub
@@ -1008,7 +1011,7 @@ Private Sub sckBNLS_DataArrival(ByVal bytesTotal As Long)
     Do While Len(data) > 2
         CopyMemory pLen, ByVal Mid$(data, 1, 2), 2
         pID = Asc(Mid$(data, 3, 1))
-        bnlsPacket.SetData Mid$(data, 4)
+        bnlsPacketHandler.SetData Mid$(data, 4)
     
         Select Case pID
             Case &H10: RECV_BNLS_0x10
@@ -1055,7 +1058,7 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
     
         CopyMemory pLen, ByVal Mid$(data, 3, 2), 2
         If pLen = 0 Then Exit Sub
-        chiefPacket.SetData Mid(data, 5, pLen - 4)
+        chiefPacketHandler.SetData Mid(data, 5, pLen - 4)
   
         Select Case pID
             Case &H0: Chief_Recv0x00
@@ -1184,9 +1187,9 @@ Private Sub tmrQueue_Timer()
         Dim initiate As String
         initiate = chiefData.popQueue()
       
-        With chiefPacket
+        With chiefPacketHandler
             .InsertNTString "/friends add " & initiate
-            .sendChiefPacket &HE
+            .sendPacket &HE
         End With
         chiefData.addFriend initiate
           
@@ -1359,7 +1362,7 @@ Public Sub continueCreateClan()
     Dim initCount As Integer
     initCount = dicInitiatesAdded.count
 
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD &H0
         .InsertNTString config.clanDescription
         .InsertNonNTString StrReverse$(Left$(config.clanTag & Chr$(0) & Chr$(0) & Chr$(0) & Chr$(0), 4))
@@ -1369,17 +1372,17 @@ Public Sub continueCreateClan()
             .InsertNTString key
         Next
     
-        .sendChiefPacket &H71
+        .sendPacket &H71
     End With
 End Sub
 
 Public Sub continueCheckClanTag()
     isCheckingClanTag = True
   
-    With chiefPacket
+    With chiefPacketHandler
         .InsertDWORD &H0
         .InsertNonNTString StrReverse$(Left$(config.clanTag & Chr$(0) & Chr$(0) & Chr$(0) & Chr$(0), 4))
-        .sendChiefPacket &H70
+        .sendPacket &H70
     End With
 End Sub
 

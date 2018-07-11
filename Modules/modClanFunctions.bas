@@ -25,7 +25,7 @@ Public Sub prepareInitiatesAndChief()
                 And Not bot(i).hasChieftainAsFriend) Then
             With Packet(i)
                 .InsertNTString "/friends add " & chief.username
-                .sendPacket i, &HE
+                .sendPacket &HE
             End With
         End If
 

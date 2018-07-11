@@ -6,20 +6,13 @@ BEGIN
   DataSourceBehavior  = 0  'vbNone
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
-Attribute VB_Name = "clsPacket"
+Attribute VB_Name = "clsPacketHandler"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'-----------------------------
-'-                           -
-'-      clsPacket.cls        -
-'-                           -
-'-  VectorBot Packet Class   -
-'-                           -
-'-----------------------------
-
 Private sIn As String, sOut As String, sLen As Long
+Private sck As Winsock, pt As packetType
 
 Public Function getPacket()
     getPacket = sIn
@@ -28,6 +21,11 @@ End Function
 Public Function getOut()
     getOut = sOut
 End Function
+
+Public Sub setup(socket As Winsock, packetType As packetType)
+    Set sck = socket
+    pt = packetType
+End Sub
 
 Public Sub SetData(ByVal sData As String)
     sIn = sData
@@ -70,36 +68,19 @@ Public Sub InsertNonNTString(ByVal value As String)
     sOut = sOut & value
 End Sub
 
-Public Sub sendBNLSPacket(ByVal ID As Byte)
-    Dim pLen As String * 2
-  
-    CopyMemory ByVal pLen, (Len(sOut) + 3), 2
-  
-    If (frmMain.sckBNLS.State = sckConnected) Then
-        frmMain.sckBNLS.SendData pLen & Chr$(ID) & sOut
-    End If
-End Sub
-
-Public Sub sendPacket(ByVal index As Integer, ByVal ID As Byte)
-    Dim pLen As String * 2
-  
-    CopyMemory ByVal pLen, (Len(sOut) + 4), 2
-  
-    If frmMain.sckClanMembers(index).State = sckConnected Then
-        frmMain.sckClanMembers(index).SendData Chr$(&HFF) & Chr$(ID) & pLen & sOut
+Public Sub sendPacket(ByVal ID As Byte)
+    Dim pLen As String * 2, outLength As Long, header As String
+    
+    outLength = (Len(sOut) + IIf(pt = packetType.BNCS, 4, 3))
+    
+    CopyMemory ByVal pLen, outLength, 2
+    
+    header = IIf(pt = packetType.BNCS, Chr$(&HFF) & Chr$(ID) & pLen, pLen & Chr$(ID))
+    
+    If sck.State = sckConnected Then
+        sck.SendData header & sOut
     End If
     
-    sOut = vbNullString
-End Sub
-
-Public Sub sendChiefPacket(ByVal ID As Byte)
-    Dim pLen As String * 2
-  
-    CopyMemory ByVal pLen, (Len(sOut) + 4), 2
-  
-    If frmMain.sckChieftain.State = sckConnected Then
-        frmMain.sckChieftain.SendData Chr$(&HFF) & Chr$(ID) & pLen & sOut
-    End If
     sOut = vbNullString
 End Sub
 

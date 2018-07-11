@@ -117,10 +117,10 @@ Private Sub cmdRemoveFriend_Click()
     frnd = lstFriendsList.List(lstFriendsList.ListIndex)
     If frnd = vbNullString Then Exit Sub
     
-    With chiefPacket
+    With chiefPacketHandler
         .InsertNTString "/friends remove " & frnd
         lstFriendsList.RemoveItem (lstFriendsList.ListIndex)
-        .sendChiefPacket &HE
+        .sendPacket &HE
     End With
     chiefData.removeFriend frnd
   
