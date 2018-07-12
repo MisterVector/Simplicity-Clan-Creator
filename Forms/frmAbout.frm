@@ -69,7 +69,7 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label lblTitle 
       Alignment       =   2  'Center
-      Caption         =   "Simplicity Clan Creator %v by Vector"
+      Caption         =   "Simplicity Clan Creator v%v by Vector"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   13.5
