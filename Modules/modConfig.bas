@@ -102,6 +102,17 @@ Public Sub loadConfig()
     If config.useCustomInitiates Then
         frmMain.chkCustomInitiates.value = 1
     End If
+    
+    tVal = ReadINI("Main", "CheckUpdateOnStartup", "Config.ini")
+    config.checkUpdateOnStartup = (UCase(tVal) = "Y")
+    
+    If (tVal = vbNullString) Then
+        config.checkUpdateOnStartup = DEFAULT_CHECK_UPDATE_ON_STARTUP
+    End If
+    
+    If (config.checkUpdateOnStartup) Then
+        frmMain.chkCheckUpdateOnStartup.value = 1
+    End If
   
     With frmMain
         .txtTimeOut.text = config.timeOut
@@ -138,7 +149,8 @@ Public Sub saveConfig(ByVal saveClanInfo As Boolean)
     WriteINI "Main", "Channel", config.Channel, "Config.ini"
     WriteINI "Main", "SaveClanInfo", IIf(config.saveClanInfo, "Y", "N"), "Config.ini"
     WriteINI "Main", "UseCustomInitiates", IIf(config.useCustomInitiates, "Y", "N"), "Config.ini"
-  
+    WriteINI "Main", "CheckUpdateOnStartup", IIf(config.checkUpdateOnStartup, "Y", "N"), "Config.ini"
+
     If saveClanInfo Then
         WriteINI "Main", "Chieftain", chief.username, "Config.ini"
         WriteINI "Main", "ChieftainPassword", chief.password, "Config.ini"

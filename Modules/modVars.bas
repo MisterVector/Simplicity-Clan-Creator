@@ -13,6 +13,7 @@ Public Const DEFAULT_RECONNECT_TIME           As Integer = 12000
 Public Const DEFAULT_VERSION_BYTE             As Long = &H1D
 
 Public Const DEFAULT_REMEMBER_WINDOW_POSITION As Boolean = False
+Public Const DEFAULT_CHECK_UPDATE_ON_STARTUP  As Boolean = True
 
 Public initiateManager As New clsCustomInitiates
 Public initiateNumber As Integer
@@ -43,6 +44,8 @@ Public chiefData As New clsChieftainData
 
 Public clannedKeyCheckClan As String
 
+Public manualUpdateCheck As Boolean
+
 Public Enum KeyType
     BAD
     IN_USE
@@ -69,6 +72,7 @@ Public Type ConfigType
     saveClanInfo As Boolean
     useCustomInitiates As Boolean
     
+    checkUpdateOnStartup As Boolean
     rememberWindowPosition As Boolean
     windowTop As Integer
     windowLeft As Integer

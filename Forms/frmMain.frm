@@ -336,6 +336,23 @@ Begin VB.Form frmMain
       TabIndex        =   23
       Top             =   0
       Width           =   7935
+      Begin VB.CheckBox chkCheckUpdateOnStartup 
+         Caption         =   "Check for Update on Startup"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   4080
+         TabIndex        =   39
+         Top             =   1515
+         Width           =   2895
+      End
       Begin VB.CheckBox chkRememberWindowPosition 
          Caption         =   "Remember Window Position"
          BeginProperty Font 
@@ -544,7 +561,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -949,6 +965,12 @@ Private Sub Form_Load()
     Set chiefPacketHandler = New clsPacketHandler
     chiefPacketHandler.setup sckChieftain, packetType.BNCS
   
+    If (config.checkUpdateOnStartup) Then
+        If (sckUpdateCheck.State = sckClosed) Then
+            sckUpdateCheck.Connect "files.codespeak.org", 80
+        End If
+    End If
+  
     programLoaded = True
 End Sub
 
@@ -966,6 +988,7 @@ Private Sub Form_Unload(Cancel As Integer)
       
             .rememberWindowPosition = chkRememberWindowPosition.value
             .saveClanInfo = chkSaveClanInfo.value
+            .checkUpdateOnStartup = chkCheckUpdateOnStartup.value
             .windowTop = frmMain.Top
             .windowLeft = frmMain.Left
         End With
@@ -993,6 +1016,7 @@ End Sub
 Private Sub mnuCheckForUpdates_Click()
     If (sckUpdateCheck.State = sckClosed) Then
         sckUpdateCheck.Connect "files.codespeak.org", 80
+        manualUpdateCheck = True
     End If
 End Sub
 
@@ -1239,7 +1263,10 @@ Private Sub tmrCheckUpdate_Timer()
             ShellExecute 0, "open", RELEASES_URL, vbNullString, vbNullString, 4
         End If
     Else
-        MsgBox "There is no new version at this time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
+        If (manualUpdateCheck) Then
+            MsgBox "There is no new version at this time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
+            manualUpdateCheck = False
+        End If
     End If
 err:
     If err.Number > 0 Then
