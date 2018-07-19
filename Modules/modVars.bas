@@ -13,6 +13,8 @@ Public Const DEFAULT_RECONNECT_TIME           As Integer = 12000
 Public Const DEFAULT_VERSION_BYTE             As Long = &H1D
 
 Public Const DEFAULT_REMEMBER_WINDOW_POSITION As Boolean = False
+Public Const DEFAULT_SAVE_CLAN_INFO           As Boolean = True
+Public Const DEFAULT_USE_CUSTOM_INITIATES     As Boolean = False
 Public Const DEFAULT_CHECK_UPDATE_ON_STARTUP  As Boolean = True
 
 Public initiateManager As New clsCustomInitiates

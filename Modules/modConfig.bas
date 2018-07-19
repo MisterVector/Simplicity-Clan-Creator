@@ -7,6 +7,10 @@ Public Sub loadConfig()
     tVal = ReadINI("Window", "RememberWindowPosition", "Config.ini")
     config.rememberWindowPosition = (UCase(tVal) = "Y")
   
+    If (tVal = vbNullString) Then
+        config.rememberWindowPosition = DEFAULT_REMEMBER_WINDOW_POSITION
+    End If
+  
     If (config.rememberWindowPosition) Then
         frmMain.chkRememberWindowPosition.value = 1
     End If
@@ -92,12 +96,20 @@ Public Sub loadConfig()
     tVal = ReadINI("Main", "SaveClanInfo", "Config.ini")
     config.saveClanInfo = (UCase(tVal) = "Y")
   
+    If (tVal = vbNullString) Then
+        config.saveClanInfo = DEFAULT_SAVE_CLAN_INFO
+    End If
+  
     If config.saveClanInfo Then
         frmMain.chkSaveClanInfo.value = 1
     End If
   
     tVal = ReadINI("Main", "UseCustomInitiates", "Config.ini")
     config.useCustomInitiates = (UCase(tVal) = "Y")
+    
+    If (tVal = vbNullString) Then
+        config.useCustomInitiates = DEFAULT_USE_CUSTOM_INITIATES
+    End If
   
     If config.useCustomInitiates Then
         frmMain.chkCustomInitiates.value = 1
