@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form frmAbout 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "About Simplicity"
+   Caption         =   "About Simplicity Clan Creator"
    ClientHeight    =   2670
    ClientLeft      =   45
    ClientTop       =   375
