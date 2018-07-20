@@ -99,7 +99,7 @@ Public Sub AddChat(ParamArray saElements() As Variant)
             .SelStart = Len(.text)
             .SelLength = 0
             .SelColor = saElements(i)
-            .SelText = saElements(i + 1) & IIf(i + 1 = UBound(saElements), vbNewLine, "")
+            .SelText = saElements(i + 1) & IIf(i + 1 = UBound(saElements), vbNewLine, vbNullString)
         Next i
     End With
 End Sub
@@ -107,7 +107,7 @@ End Sub
 Public Function returnProperGateway(ByVal gateway As String) As String
     Dim gatewayList() As String
   
-    If (IsNumeric(Replace(gateway, ".", ""))) Then
+    If (IsNumeric(Replace(gateway, ".", vbNullString))) Then
         returnProperGateway = gateway
         Exit Function
     End If

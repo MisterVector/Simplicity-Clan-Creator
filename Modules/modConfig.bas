@@ -216,7 +216,7 @@ Public Function loadProxies() As Boolean
                         IP = Split(tProxies(i), ":")(0)
                         Port = Split(tProxies(i), ":")(1)
                 
-                        If (IsNumeric(Port) And IsNumeric(Replace(IP, ".", ""))) Then
+                        If (IsNumeric(Port) And IsNumeric(Replace(IP, ".", vbNullString))) Then
                             If (Port > 0 And Port <= 65535) Then
                                 Select Case proxyfile
                                     Case "SOCKS4.txt": Version = "s4"

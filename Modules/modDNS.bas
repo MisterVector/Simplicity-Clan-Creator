@@ -23,7 +23,7 @@ Private Type VBDnsRecord
 End Type
 
 Public Function Resolve(sAddr As String) As String
-    If (IsNumeric(Replace(sAddr, ".", ""))) Then
+    If (IsNumeric(Replace(sAddr, ".", vbNullString))) Then
         Resolve = sAddr
         Exit Function
     End If

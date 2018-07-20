@@ -200,8 +200,8 @@ Private Sub btnRemove_Click()
     
     initiateManager.removeInitiate username
     
-    txtUsername.text = ""
-    txtPassword.text = ""
+    txtUsername.text = vbNullString
+    txtPassword.text = vbNullString
     
     btnUpdate.Enabled = False
     btnAdd.Enabled = True
@@ -213,8 +213,8 @@ Private Sub btnUpdate_Click()
     btnUpdate.Enabled = False
     btnAdd.Enabled = True
     
-    txtUsername.text = ""
-    txtPassword.text = ""
+    txtUsername.text = vbNullString
+    txtPassword.text = vbNullString
 End Sub
 
 Private Sub Form_Load()
@@ -222,7 +222,7 @@ Private Sub Form_Load()
     accounts = initiateManager.getInitiates()
     
     For i = 0 To UBound(accounts)
-        If (accounts(i).getUsername() <> "") Then
+        If (accounts(i).getUsername() <> vbNullString) Then
             lstInitiates.AddItem accounts(i).getUsername()
         End If
     Next i
@@ -239,15 +239,15 @@ Private Sub lstInitiates_Click()
     btnUpdate.Enabled = False
     btnAdd.Enabled = True
   
-    txtUsername.text = ""
-    txtPassword.text = ""
+    txtUsername.text = vbNullString
+    txtPassword.text = vbNullString
 End Sub
 
 Private Sub lstInitiates_DblClick()
     Dim username As String
     username = lstInitiates.List(lstInitiates.ListIndex)
   
-    If (username = "") Then
+    If (username = vbNullString) Then
         Exit Sub
     End If
   

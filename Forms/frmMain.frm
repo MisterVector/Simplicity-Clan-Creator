@@ -880,7 +880,7 @@ Private Sub Form_Load()
         dicServerList.Add elem, realmsString
         realmsString = vbNullString
         idx = idx + 1
-        If (idx < 4) Then cmbServer.AddItem ""
+        If (idx < 4) Then cmbServer.AddItem vbNullString
     Next
   
     If (Dir$(App.path & "\WAR3", vbDirectory) = vbNullString) Then
@@ -897,7 +897,7 @@ Private Sub Form_Load()
         Dim initiateCount As Integer
         initiateCount = initiateManager.countInitiates()
   
-        AddChat vbGreen, "Loaded ", vbYellow, initiateCount, vbGreen, " custom initiate" & IIf(initiateCount > 1, "s", "") & "!"
+        AddChat vbGreen, "Loaded ", vbYellow, initiateCount, vbGreen, " custom initiate" & IIf(initiateCount > 1, "s", vbNullString) & "!"
     End If
   
     loadConfig
@@ -926,7 +926,7 @@ Private Sub Form_Load()
     keyCount = keys.getCount()
   
     If (keyCount > 0) Then
-        AddChat vbGreen, "Loaded ", vbYellow, keyCount, vbGreen, " CD-Key" & IIf(keyCount > 1, "s", "") & "!"
+        AddChat vbGreen, "Loaded ", vbYellow, keyCount, vbGreen, " CD-Key" & IIf(keyCount > 1, "s", vbNullString) & "!"
     End If
 
     loadProxies
@@ -1221,7 +1221,7 @@ Private Sub tmrQueue_Timer()
         Dim botIndex As Integer
         botIndex = modOtherCode.getBotIndexByName(initiate)
     
-        AddChat vbYellow, "Added " & IIf(bot(botIndex).hasRestrictedKey, "restricted ", "") & "initiate """ & initiate & """ to chief's friends list."
+        AddChat vbYellow, "Added " & IIf(bot(botIndex).hasRestrictedKey, "restricted ", vbNullString) & "initiate """ & initiate & """ to chief's friends list."
     End If
       
     If (chiefData.isQueueEmpty()) Then

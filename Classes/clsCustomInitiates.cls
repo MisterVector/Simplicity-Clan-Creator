@@ -26,7 +26,7 @@ Public Function addCustomInitiate(initiate As String, password As String) As Boo
         End If
     Next i
 
-    If (initiates(0).getUsername() <> "") Then
+    If (initiates(0).getUsername() <> vbNullString) Then
         ReDim Preserve initiates(UBound(initiates) + 1)
     End If
 
@@ -83,8 +83,8 @@ Public Sub removeInitiate(initiate As String)
   
     If (found) Then
         If (UBound(initiates) = 0) Then
-            initiates(0).setUsername ("")
-            initiates(0).setPassword ("")
+            initiates(0).setUsername (vbNullString)
+            initiates(0).setPassword (vbNullString)
     
             Exit Sub
         End If

@@ -331,7 +331,7 @@ Public Sub Recv0x70(index As Integer)
   
     Select Case result
         Case &H0
-            AddChat vbGreen, "Initiate #" & index & ": Found a non-clanned " & IIf(bot(index).hasRestrictedKey, "restricted ", "") & "key!"
+            AddChat vbGreen, "Initiate #" & index & ": Found a non-clanned " & IIf(bot(index).hasRestrictedKey, "restricted ", vbNullString) & "key!"
             bot(index).isReadyForPreparation = True
       
             connectedCount = connectedCount + 1

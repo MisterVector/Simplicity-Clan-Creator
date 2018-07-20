@@ -365,7 +365,7 @@ Public Sub Chief_Recv0x70()
                     frmMain.btnCreateClan.Enabled = True
                 End If
             Else
-                AddChat vbGreen, "Chieftain: Found a non-clanned " & IIf(chief.hasRestrictedKey, "restricted ", "") & "key!"
+                AddChat vbGreen, "Chieftain: Found a non-clanned " & IIf(chief.hasRestrictedKey, "restricted ", vbNullString) & "key!"
                 chief.isReadyForPreparation = True
         
                 connectedCount = connectedCount + 1
