@@ -50,14 +50,14 @@ Public Function getFriendsExcludeInitiates() As String()
         Dim found As Boolean
     
         For i = 0 To 8
-            If LCase(chiefFriend) = LCase(bot(i).username) Then
+            If (LCase(chiefFriend) = LCase(bot(i).username)) Then
                 found = True
                 Exit For
             End If
         Next i
     
-        If Not found Then
-            If friends <> vbNullString Then
+        If (Not found) Then
+            If (friends <> vbNullString) Then
                 friends = friends & "|"
             End If
     
@@ -72,7 +72,7 @@ End Function
 
 Public Function isFriend(ByVal user As String)
     For Each frnd In colFriendsList
-        If LCase(user) = LCase(frnd) Then
+        If (LCase(user) = LCase(frnd)) Then
             isFriend = True
             Exit Function
         End If
@@ -81,7 +81,7 @@ End Function
 
 Public Sub removeFriend(ByVal user As String)
     For i = 1 To colFriendsList.count
-        If LCase(colFriendsList.Item(i)) = LCase(user) Then
+        If (LCase(colFriendsList.Item(i)) = LCase(user)) Then
             colFriendsList.Remove i
             Exit For
         End If
@@ -98,7 +98,7 @@ End Function
 
 Public Function hasInitiate(ByVal init As String) As Boolean
     For Each initiate In colInitiateList
-        If LCase(initiate) = LCase(init) Then
+        If (LCase(initiate) = LCase(init)) Then
             hasInitiate = True
             Exit Function
         End If
@@ -148,7 +148,7 @@ End Function
 
 Public Sub removeQueueByName(ByVal name As String)
     For i = 1 To chiefQueue.count
-        If LCase(chiefQueue.Item(i)) = LCase(name) Then
+        If (LCase(chiefQueue.Item(i)) = LCase(name)) Then
             chiefQueue.Remove i
             Exit For
         End If

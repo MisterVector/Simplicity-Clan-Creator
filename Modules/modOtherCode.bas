@@ -74,7 +74,7 @@ End Sub
 
 Public Function getBotIndexByName(ByVal user As String) As Integer
     For i = 0 To 8
-        If LCase(bot(i).username) = LCase(user) Then
+        If (LCase(bot(i).username) = LCase(user)) Then
             getBotIndexByName = i
             Exit Function
         End If
@@ -86,7 +86,7 @@ Public Sub AddChat(ParamArray saElements() As Variant)
         Dim sp() As String
         sp = Split(.text, vbNewLine)
     
-        If UBound(sp) >= 49 Then
+        If (UBound(sp) >= 49) Then
             .text = vbNullString
         End If
     
@@ -107,7 +107,7 @@ End Sub
 Public Function returnProperGateway(ByVal gateway As String) As String
     Dim gatewayList() As String
   
-    If IsNumeric(Replace(gateway, ".", "")) Then
+    If (IsNumeric(Replace(gateway, ".", ""))) Then
         returnProperGateway = gateway
         Exit Function
     End If
@@ -124,7 +124,7 @@ Public Function getFileSize(path As String) As Long
     Close #1
   
 oops:
-    If getFileSize > 0 Then Exit Function
+    If (getFileSize > 0) Then Exit Function
     getFileSize = 0
 End Function
 
@@ -143,8 +143,8 @@ Public Function IsProxyPacket(index As Integer, ByVal data As String) As Boolean
             IsProxyPacket = True
     End Select
 
-    If Not IsProxyPacket Then
-        If Len(data) >= 12 And LCase(Left(data, 4)) = "http" Then
+    If (Not IsProxyPacket) Then
+        If (Len(data) >= 12 And LCase(Left(data, 4))) = "http" Then
             Dim packetOutput As String
             Dim responseCode As String
       
@@ -178,8 +178,8 @@ Public Function IsChiefProxyPacket(ByVal data As String) As Boolean
             IsChiefProxyPacket = True
     End Select
 
-    If Not IsChiefProxyPacket Then
-        If Len(data) >= 12 And LCase(Left(data, 4)) = "http" Then
+    If (Not IsChiefProxyPacket) Then
+        If (Len(data) >= 12 And LCase(Left(data, 4)) = "http") Then
             Dim packetOutput As String
             Dim responseCode As String
       
@@ -202,7 +202,7 @@ Public Function getRealmName(ByVal serverConfig As String) As String
     Dim tempServer As String, IPs() As String, doExit As Boolean
   
     For Each key In dicServerList.keys
-        If LCase(key) = LCase(serverConfig) Then
+        If (LCase(key) = LCase(serverConfig)) Then
             tempServer = key
             Exit For
         End If
@@ -210,14 +210,14 @@ Public Function getRealmName(ByVal serverConfig As String) As String
         IPs = Split(dicServerList.Item(key), "|")
     
         For Each IP In IPs
-            If IP = serverConfig Then
+            If (IP = serverConfig) Then
                 tempServer = key
                 doExit = True
                 Exit For
             End If
         Next
     
-        If doExit Then
+        If (doExit) Then
             Exit For
         End If
     Next

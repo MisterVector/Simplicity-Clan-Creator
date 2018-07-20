@@ -6,7 +6,7 @@ Public Function loadCDKeys() As Boolean
 
     Set tmp = New Dictionary
 
-    If getFileSize(App.path & "\CD-Keys.txt") > 0 Then
+    If (getFileSize(App.path & "\CD-Keys.txt") > 0) Then
         Open App.path & "\CD-Keys.txt" For Input As #1
             arrKeys = Split(Input(LOF(1), 1), vbNewLine)
         Close #1
@@ -14,8 +14,8 @@ Public Function loadCDKeys() As Boolean
         For i = 0 To UBound(arrKeys)
             arrKeys(i) = UCase(Trim(arrKeys(i)))
     
-            If arrKeys(i) <> vbNullString Then
-                If Not tmp.Exists(arrKeys(i)) Then
+            If (arrKeys(i) <> vbNullString) Then
+                If (Not tmp.Exists(arrKeys(i))) Then
                     tmp.Add arrKeys(i), arrKeys(i)
                 End If
             End If
@@ -53,7 +53,7 @@ Public Sub sendBackGoodKeys()
         For i = 0 To keys.getCount()
             key = keys.getKeyByIndex(i)
     
-            If Not key = vbNullString Then
+            If (Not key = vbNullString) Then
                 Print #1, key
             End If
         Next i

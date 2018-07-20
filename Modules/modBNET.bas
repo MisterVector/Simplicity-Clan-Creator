@@ -97,7 +97,7 @@ Public Sub Recv0x51(index As Integer)
     frmMain.tmrInitiateTimeout(index).Enabled = False
     getStatusCode = Packet(index).GetDWORD
   
-    If getStatusCode = &H0 Then
+    If (getStatusCode = &H0) Then
         Send0x53 index
     Else
         frmMain.sckClanMembers(index).Close
@@ -128,7 +128,7 @@ Public Sub Recv0x51(index As Integer)
                 AddChat vbRed, "Initiate #" & index & ": Your CD-Key is in use by " & Packet(index).getNTString & "."
                 addKey bot(index).keyIndex, bot(index).key, KeyType.IN_USE
             Case &H202, &H203
-                If getStatusCode = &H202 Then
+                If (getStatusCode = &H202) Then
                     AddChat vbRed, "Initiate #" & index & ": That CD-Key is banned."
                 Else
                     AddChat vbRed, "Initiate #" & index & ": That CD-Key has the wrong product."
@@ -140,7 +140,7 @@ Public Sub Recv0x51(index As Integer)
         bot(index).key = keys.getKey(keyIdx)
         bot(index).keyIndex = keyIdx
     
-        If bot(index).key = vbNullString Then
+        If (bot(index).key = vbNullString) Then
             AddChat vbRed, "Initiate #" & index & ": You have run out of keys."
             resetAll
         Else
@@ -162,8 +162,8 @@ Public Sub Recv0x46(index As Integer)
     Packet(index).Skip 13
     dumpedPacket = Packet(index).getPacket
     
-    If InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
-            Or InStr(dumpedPacket, "Your account is muted.") > 0 Then
+    If (InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
+            Or InStr(dumpedPacket, "Your account is muted.")) > 0 Then
         bot(index).hasRestrictedKey = True
     End If
   
@@ -175,7 +175,7 @@ Public Sub Send0x53(index As Integer)
 
     bot(index).nls_P = nls_init(bot(index).username, bot(index).password)
 
-    If bot(index).nls_P = 0 Then
+    If (bot(index).nls_P = 0) Then
         MsgBox "NLS made a bad call.", vbOKOnly Or vbCritical, PROGRAM_TITLE
         unloadAll
         Exit Sub
@@ -222,7 +222,7 @@ Public Sub Recv0x52(index As Integer)
   
     result = Packet(index).GetDWORD
   
-    If result = &H0 Then
+    If (result = &H0) Then
         Send0x53 index
         AddChat vbGreen, "Initiate #" & index & ": Account successfully created."
     Else
@@ -289,11 +289,11 @@ Public Sub Recv0x65(index As Integer)
     With Packet(index)
         friendsCount = .GetByte
     
-        If friendsCount > 0 Then
+        If (friendsCount > 0) Then
             For i = 0 To friendsCount - 1
                 curFriend = .getNTString
         
-                If LCase(curFriend) = LCase(chief.username) Then
+                If (LCase(curFriend) = LCase(chief.username)) Then
                     bot(index).hasChieftainAsFriend = True
                 End If
         
@@ -340,7 +340,7 @@ Public Sub Recv0x70(index As Integer)
             Dim readyCount As Integer
             readyCount = countReadyForPreparation()
       
-            If readyCount = 10 Then
+            If (readyCount = 10) Then
                 prepareInitiatesAndChief
             End If
         Case &H1
@@ -356,7 +356,7 @@ Public Sub Recv0x70(index As Integer)
             bot(index).key = keys.getKey(keyIdx)
             bot(index).keyIndex = keyIdx
       
-            If bot(index).key = vbNullString Then
+            If (bot(index).key = vbNullString) Then
                 AddChat vbRed, "Initiate #" & index & ": No more keys available."
                 resetAll
             Else

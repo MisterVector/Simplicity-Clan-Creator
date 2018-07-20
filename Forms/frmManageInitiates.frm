@@ -170,17 +170,17 @@ End Sub
 Private Sub btnAdd_Click()
     Dim str As String
   
-    If txtUsername.text = vbNullString Or txtPassword.text = vbNullString Then
+    If (txtUsername.text = vbNullString Or txtPassword.text = vbNullString) Then
         MsgBox "Username and Password must not be blank.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
   
-    If Len(txtUsername.text) < 3 Then
+    If (Len(txtUsername.text) < 3) Then
         MsgBox "Username must be 3 characters or more.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
   
-    If Not initiateManager.addCustomInitiate(txtUsername.text, txtPassword.text) Then
+    If (Not initiateManager.addCustomInitiate(txtUsername.text, txtPassword.text)) Then
         MsgBox "That initiate is already on the initiate list!", vbOKOnly Or vbExclamation, PROGRAM_TITLE
         Exit Sub
     End If
@@ -194,7 +194,7 @@ End Sub
 Private Sub btnRemove_Click()
     Dim username As String, initiateArray() As String
     
-    If lstInitiates.List(lstInitiates.ListIndex) = vbNullString Then Exit Sub
+    If (lstInitiates.List(lstInitiates.ListIndex) = vbNullString) Then Exit Sub
     username = lstInitiates.List(lstInitiates.ListIndex)
     lstInitiates.RemoveItem lstInitiates.ListIndex
     
@@ -222,7 +222,7 @@ Private Sub Form_Load()
     accounts = initiateManager.getInitiates()
     
     For i = 0 To UBound(accounts)
-        If accounts(i).getUsername() <> "" Then
+        If (accounts(i).getUsername() <> "") Then
             lstInitiates.AddItem accounts(i).getUsername()
         End If
     Next i
@@ -232,7 +232,7 @@ Private Sub lstInitiates_Click()
     Dim username As String
     username = lstInitiates.List(lstInitiates.ListIndex)
   
-    If username = clickedUsername Then
+    If (username = clickedUsername) Then
         Exit Sub
     End If
 
@@ -247,7 +247,7 @@ Private Sub lstInitiates_DblClick()
     Dim username As String
     username = lstInitiates.List(lstInitiates.ListIndex)
   
-    If username = "" Then
+    If (username = "") Then
         Exit Sub
     End If
   

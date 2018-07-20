@@ -97,7 +97,7 @@ Public Sub Chief_Recv0x51()
     frmMain.tmrChiefTimeout.Enabled = False
     statusCode = chiefPacketHandler.GetDWORD
   
-    If statusCode = &H0 Then
+    If (statusCode = &H0) Then
         Chief_Send0x53
     Else
         frmMain.sckChieftain.Close
@@ -128,7 +128,7 @@ Public Sub Chief_Recv0x51()
                 AddChat vbRed, "Chieftain: Your CD-Key is in use by " & chiefPacketHandler.getNTString & "."
                 addKey chief.keyIndex, chief.key, KeyType.IN_USE
             Case &H202, &H203
-                If statusCode = &H202 Then
+                If (statusCode = &H202) Then
                     AddChat vbRed, "Chieftain: That CD-Key is banned."
                 Else
                     AddChat vbRed, "Chieftain: That CD-Key has the wrong product."
@@ -140,7 +140,7 @@ Public Sub Chief_Recv0x51()
         chief.key = keys.getKey(keyIdx)
         chief.keyIndex = keyIdx
     
-        If chief.key = vbNullString Then
+        If (chief.key = vbNullString) Then
             AddChat vbRed, "Chieftain: You have run out of keys."
             resetAll
         Else
@@ -160,8 +160,8 @@ Public Sub Chief_Recv0x46()
     chiefPacketHandler.Skip 13
     dumpedPacket = chiefPacketHandler.getPacket
    
-    If InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
-            Or InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 Then
+    If (InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
+            Or InStr(dumpedPacket, "Your account has had all chat privileges suspended.")) > 0 Then
         chief.hasRestrictedKey = True
     End If
   
@@ -173,7 +173,7 @@ Public Sub Chief_Send0x53()
 
     chief.nls_P = nls_init(chief.username, chief.password)
 
-    If chief.nls_P = 0 Then
+    If (chief.nls_P = 0) Then
         MsgBox "NLS made a bad call.", vbOKOnly Or vbCritical, PROGRAM_TITLE
         unloadAll
         Exit Sub
@@ -220,7 +220,7 @@ Public Sub Chief_Recv0x52()
   
     result = chiefPacketHandler.GetDWORD
   
-    If result = &H0 Then
+    If (result = &H0) Then
         Chief_Send0x53
         AddChat vbGreen, "Chieftain: Account successfully created."
     Else
@@ -272,7 +272,7 @@ Public Sub Chief_Recv0x65()
     With chiefPacketHandler
         friendsCount = .GetByte
 
-        If friendsCount > 0 Then
+        If (friendsCount > 0) Then
             For i = 0 To friendsCount - 1
                 curFriend = .getNTString
                 chiefData.addFriend curFriend
@@ -311,8 +311,8 @@ Public Sub Chief_Recv0x70()
   
     Select Case result
         Case &H0
-            If isCheckingClanTag Then
-                If initiateCount < 9 Then
+            If (isCheckingClanTag) Then
+                If (initiateCount < 9) Then
                     Dim acceptedInitiates() As String, reconnectCount As Integer
 
                     ReDim acceptedInitiates(initiateCount)
@@ -326,13 +326,13 @@ Public Sub Chief_Recv0x70()
                         found = False
 
                         For j = 0 To UBound(acceptedInitiates)
-                            If LCase(bot(i).username) = LCase(acceptedInitiates(j)) Then
+                            If (LCase(bot(i).username) = LCase(acceptedInitiates(j))) Then
                                 found = True
                                 Exit For
                             End If
                         Next j
 
-                        If Not found Then
+                        If (Not found) Then
                             AddChat vbYellow, "Initiate #" & i & " lost connection. It will be reconnected."
               
                             disconnectInitiate i
@@ -342,7 +342,7 @@ Public Sub Chief_Recv0x70()
                         End If
                     Next i
         
-                    If reconnectCount = 0 Then
+                    If (reconnectCount = 0) Then
                         AddChat vbRed, "There was an error in creating the clan. Please try again."
             
                         resetAll
@@ -355,7 +355,7 @@ Public Sub Chief_Recv0x70()
                     For i = 1 To initiateCount
                         init = chiefPacketHandler.getNTString
             
-                        If isInitiate(init) Then
+                        If (isInitiate(init)) Then
                             dicInitiatesAdded.Add init, init
                         End If
                     Next i
@@ -374,12 +374,12 @@ Public Sub Chief_Recv0x70()
                 Dim readyCount As Integer
                 readyCount = countReadyForPreparation()
 
-                If readyCount = 10 Then
+                If (readyCount = 10) Then
                     prepareInitiatesAndChief
                 End If
             End If
         Case &H1
-            If isCheckingClanTag Then
+            If (isCheckingClanTag) Then
                 AddChat vbRed, "The specified clan tag is taken."
                 AddChat vbYellow, "You may change the clan tag and description and check again."
                 
@@ -399,7 +399,7 @@ Public Sub Chief_Recv0x70()
             chief.key = keys.getKey(keyIdx)
             chief.keyIndex = keyIdx
             
-            If chief.key = vbNullString Then
+            If (chief.key = vbNullString) Then
                 AddChat vbRed, "Chieftain: No more keys available."
                 resetAll
             Else

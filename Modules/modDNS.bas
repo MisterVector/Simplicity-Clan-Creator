@@ -23,7 +23,7 @@ Private Type VBDnsRecord
 End Type
 
 Public Function Resolve(sAddr As String) As String
-    If IsNumeric(Replace(sAddr, ".", "")) Then
+    If (IsNumeric(Replace(sAddr, ".", ""))) Then
         Resolve = sAddr
         Exit Function
     End If
@@ -37,18 +37,18 @@ Public Function Resolve(sAddr As String) As String
     Dim pServers    As Long
     Dim sName       As String
 
-    If DnsQuery(sAddr, DNS_TYPE_A, DNS_QUERY_BYPASS_CACHE, pServers, pRecord, 0) = 0 Then
+    If (DnsQuery(sAddr, DNS_TYPE_A, DNS_QUERY_BYPASS_CACHE, pServers, pRecord, 0)) = 0 Then
         pNext = pRecord
         
         Do While pNext <> 0
             Call CopyMemory(uRecord, pNext, Len(uRecord))
             
-            If uRecord.wType = DNS_TYPE_A Then
+            If (uRecord.wType = DNS_TYPE_A) Then
                 lPtr = inet_ntoa(uRecord.prt)
                 sName = String(lstrlen(lPtr), 0)
                 Call CopyMemory(ByVal sName, lPtr, Len(sName))
                 
-                If LenB(Resolve) <> 0 Then
+                If (LenB(Resolve) <> 0) Then
                     Resolve = Resolve & " "
                 End If
                 

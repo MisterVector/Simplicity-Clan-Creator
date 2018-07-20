@@ -5,7 +5,7 @@ Public Function generateClannedKeyCheckClan() As String
   
     For i = 0 To 3
         idx = Int(Rnd(GetTickCount()) * Len(alphanumeric))
-        If idx = 0 Then idx = 1
+        If (idx = 0) Then idx = 1
   
         final = final & Mid(alphanumeric, idx, 1)
     Next i
@@ -35,7 +35,7 @@ Public Sub prepareInitiatesAndChief()
         End If
     Next i
   
-    If Not chiefData.isQueueEmpty() Then
+    If (Not chiefData.isQueueEmpty()) Then
         frmMain.tmrQueue.Enabled = True
     Else
         AddChat vbYellow, "All bots are ready. You may now check the clan tag."
@@ -47,12 +47,12 @@ Public Function countReadyForPreparation(Optional ByVal includeChief As Boolean 
     Dim count As Integer
 
     For i = 0 To 8
-        If bot(i).isReadyForPreparation Then
+        If (bot(i).isReadyForPreparation) Then
             count = count + 1
         End If
     Next i
   
-    If includeChief And chief.isReadyForPreparation Then
+    If (includeChief And chief.isReadyForPreparation) Then
         count = count + 1
     End If
   
@@ -63,7 +63,7 @@ Public Sub disconnectInitiate(ByVal index As Integer)
     frmMain.sckClanMembers(index).Close
     frmMain.tmrInitiateTimeout(index).Enabled = False
   
-    If bot(index).isReadyForPreparation Then
+    If (bot(index).isReadyForPreparation) Then
         connectedCount = connectedCount - 1
         frmMain.lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
     End If
@@ -89,7 +89,7 @@ Public Sub reconnectInitiate(ByVal index As Integer)
             Version = .Version
         End With
     
-        If IP = vbNullString Then
+        If (IP = vbNullString) Then
             AddChat vbRed, "No more proxies available."
             resetAll
             Exit Sub
@@ -109,7 +109,7 @@ End Sub
 
 Public Function isInitiate(name As String) As Boolean
     For i = 0 To 8
-        If LCase(bot(i).username) = LCase(name) Then
+        If (LCase(bot(i).username) = LCase(name)) Then
             isInitiate = True
             Exit Function
         End If
@@ -123,7 +123,7 @@ Public Function isValidClanTag(clanTag As String) As Boolean
   
     lenTag = Len(clanTag)
   
-    If lenTag > 4 Or lenTag < 2 Then
+    If (lenTag > 4 Or lenTag < 2) Then
         isValidClanTag = False
         Exit Function
     End If
@@ -145,15 +145,15 @@ Public Function generateInitiate() As clsAccount
     Dim acc As New clsAccount, initFound As Boolean
 
     ' initial initialization
-    If initiateNumber = 0 Then
+    If (initiateNumber = 0) Then
         initiateNumber = 1
     End If
   
-    If config.useCustomInitiates Then
+    If (config.useCustomInitiates) Then
         Dim tempInitiate As clsAccount
         Set tempInitiate = initiateManager.getNextInitiate()
     
-        If Not tempInitiate Is Nothing Then
+        If (Not tempInitiate Is Nothing) Then
             acc.setUsername (tempInitiate.getUsername())
             acc.setPassword (tempInitiate.getPassword())
     
@@ -161,7 +161,7 @@ Public Function generateInitiate() As clsAccount
         End If
     End If
   
-    If Not initFound Then
+    If (Not initFound) Then
         acc.setUsername (config.initiate & initiateNumber)
         acc.setPassword (config.initiatePassword)
     

@@ -115,7 +115,7 @@ Private Sub cmdRemoveFriend_Click()
     Dim frnd As String
     
     frnd = lstFriendsList.List(lstFriendsList.ListIndex)
-    If frnd = vbNullString Then Exit Sub
+    If (frnd = vbNullString) Then Exit Sub
     
     With chiefPacketHandler
         .InsertNTString "/friends remove " & frnd
@@ -128,7 +128,7 @@ Private Sub cmdRemoveFriend_Click()
     friendsToRemove = friendsToRemove - 1
     lblFriendsToRemove.Caption = "Friends to remove: " & friendsToRemove
   
-    If friendsToRemove = 0 Then
+    If (friendsToRemove = 0) Then
         btnContinue.Enabled = True
     Else
         tmrEnableButton.Enabled = True
@@ -140,12 +140,12 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    If cleanClose Then Exit Sub
+    If (cleanClose) Then Exit Sub
 
     Dim msgBoxResult As Integer
     msgBoxResult = MsgBox("Are you sure you want to do that?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
   
-    If msgBoxResult = vbNo Then
+    If (msgBoxResult = vbNo) Then
         Cancel = 1
     Else
         resetAll

@@ -45,14 +45,14 @@ Public Function GetFTTime(FT As FILETIME, Optional Shorten As Boolean = False, O
     Dim SetHour As String
     Dim AP      As String
 
-    If localTime Then
+    If (localTime) Then
         FileTimeToLocalFileTime FT, LocalFT
         FileTimeToSystemTime LocalFT, SysTime
     Else
         FileTimeToSystemTime FT, SysTime
     End If
   
-    If SysTime.wHour = 0 Then
+    If (SysTime.wHour = 0) Then
         AP = "AM"
         SetHour = "12"
     ElseIf SysTime.wHour < 12 Then
@@ -68,7 +68,7 @@ Public Function GetFTTime(FT As FILETIME, Optional Shorten As Boolean = False, O
   
     SysTime.wDayOfWeek = SysTime.wDayOfWeek + 1
     
-    If Shorten Then
+    If (Shorten) Then
         GetFTTime = Format$(SysTime.wMonth, "00") & "/" & Format$(SysTime.wDay, "00") & "/" & Right$(SysTime.wYear, 2) & " " & SetHour & ":" & Format$(SysTime.wMinute, "00") & ":" & Format$(SysTime.wSecond, "00") & " " & AP
     Else
         'GetFTTime = ConvertShortToLong(WeekdayName(SysTime.wDayOfWeek, True)) & ", " & MonthName(SysTime.wMonth, True) & " " & SysTime.wDay & ", " & SysTime.wYear & " at " & SetHour & ":" & Format$(SysTime.wMinute, "00") & ":" & Format$(SysTime.wSecond, "00") & " " & AP

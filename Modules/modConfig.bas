@@ -100,7 +100,7 @@ Public Sub loadConfig()
         config.saveClanInfo = DEFAULT_SAVE_CLAN_INFO
     End If
   
-    If config.saveClanInfo Then
+    If (config.saveClanInfo) Then
         frmMain.chkSaveClanInfo.value = 1
     End If
   
@@ -111,7 +111,7 @@ Public Sub loadConfig()
         config.useCustomInitiates = DEFAULT_USE_CUSTOM_INITIATES
     End If
   
-    If config.useCustomInitiates Then
+    If (config.useCustomInitiates) Then
         frmMain.chkCustomInitiates.value = 1
     End If
     
@@ -142,7 +142,7 @@ Public Sub loadConfig()
         .txtInitiatesPassword = ReadINI("Main", "InitiatePass", "Config.ini")
     End With
 
-    If err.Number > 0 Then
+    If (err.Number > 0) Then
         err.Clear
     
         MsgBox "Errors were encountered while loading. The affected values have been set to their defaults.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
@@ -163,7 +163,7 @@ Public Sub saveConfig(ByVal saveClanInfo As Boolean)
     WriteINI "Main", "UseCustomInitiates", IIf(config.useCustomInitiates, "Y", "N"), "Config.ini"
     WriteINI "Main", "CheckUpdateOnStartup", IIf(config.checkUpdateOnStartup, "Y", "N"), "Config.ini"
 
-    If saveClanInfo Then
+    If (saveClanInfo) Then
         WriteINI "Main", "Chieftain", chief.username, "Config.ini"
         WriteINI "Main", "ChieftainPassword", chief.password, "Config.ini"
         WriteINI "Main", "ClanTag", frmMain.txtClanTag.text, "Config.ini"
@@ -172,7 +172,7 @@ Public Sub saveConfig(ByVal saveClanInfo As Boolean)
         WriteINI "Main", "InitiatePass", config.initiatePassword, "Config.ini"
     End If
   
-    If initiateManager.countInitiates() > 0 Then
+    If (initiateManager.countInitiates() > 0) Then
         initiateManager.resetIndex
   
         Open App.path & "\CustomInitiates.txt" For Output As #1
@@ -184,7 +184,7 @@ Public Sub saveConfig(ByVal saveClanInfo As Boolean)
             Next i
         Close #1
     Else
-        If getFileSize(App.path & "\CustomInitiates.txt") > 0 Then
+        If (getFileSize(App.path & "\CustomInitiates.txt") > 0) Then
             Kill App.path & "\CustomInitiates.txt"
         End If
     End If
@@ -198,26 +198,26 @@ Public Function loadProxies() As Boolean
     arrPF = Array("SOCKS4.txt", "HTTP.txt")
   
     For Each proxyfile In arrPF
-        If Dir$(App.path & "\" & proxyfile) = vbNullString Then
+        If (Dir$(App.path & "\" & proxyfile) = vbNullString) Then
             Open App.path & "\" & proxyfile For Output As #1
             Close #1
         End If
     
-        If getFileSize(App.path & "\" & proxyfile) > 0 Then
+        If (getFileSize(App.path & "\" & proxyfile) > 0) Then
             Open App.path & "\" & proxyfile For Input As #1
                 tProxies = Split(Input(LOF(1), 1), vbNewLine)
             Close #1
 
             For i = 0 To UBound(tProxies)
-                If tProxies(i) <> vbNullString Then
+                If (tProxies(i) <> vbNullString) Then
                     tProxies(i) = Trim(tProxies(i))
                     
-                    If InStr(tProxies(i), ":") Then
+                    If (InStr(tProxies(i), ":")) Then
                         IP = Split(tProxies(i), ":")(0)
                         Port = Split(tProxies(i), ":")(1)
                 
-                        If IsNumeric(Port) And IsNumeric(Replace(IP, ".", "")) Then
-                            If Port > 0 And Port <= 65535 Then
+                        If (IsNumeric(Port) And IsNumeric(Replace(IP, ".", ""))) Then
+                            If (Port > 0 And Port <= 65535) Then
                                 Select Case proxyfile
                                     Case "SOCKS4.txt": Version = "s4"
                                     Case "SOCKS5.txt": Version = "s5"
@@ -241,12 +241,12 @@ Public Function loadCustomInitiates() As Boolean
     Dim fileSize As Integer
     fileSize = getFileSize(App.path & "\CustomInitiates.txt")
   
-    If fileSize > 0 Then
+    If (fileSize > 0) Then
         Open App.path & "\CustomInitiates.txt" For Input As #1
             Do Until EOF(1)
                 Line Input #1, currentLine
               
-                If InStr(currentLine, "|") Then
+                If (InStr(currentLine, "|")) Then
                     Dim namePass() As String
                     namePass = Split(currentLine, "|")
               

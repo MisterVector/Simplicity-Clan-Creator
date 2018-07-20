@@ -77,7 +77,7 @@ Public Sub sendPacket(ByVal ID As Byte)
     
     header = IIf(pt = packetType.BNCS, Chr$(&HFF) & Chr$(ID) & pLen, pLen & Chr$(ID))
     
-    If sck.State = sckConnected Then
+    If (sck.State = sckConnected) Then
         sck.SendData header & sOut
     End If
     

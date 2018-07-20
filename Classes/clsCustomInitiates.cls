@@ -20,13 +20,13 @@ End Sub
 
 Public Function addCustomInitiate(initiate As String, password As String) As Boolean
     For i = 0 To UBound(initiates)
-        If LCase(initiates(i).getUsername()) = LCase(initiate) Then
+        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
             addCustomInitiate = False
             Exit Function
         End If
     Next i
 
-    If initiates(0).getUsername() <> "" Then
+    If (initiates(0).getUsername() <> "") Then
         ReDim Preserve initiates(UBound(initiates) + 1)
     End If
 
@@ -40,7 +40,7 @@ End Function
 
 Public Sub updateInitiate(initiate As String, password As String)
     For i = 0 To UBound(initiates)
-        If LCase(initiates(i).getUsername()) = LCase(initiate) Then
+        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
             initiates(i).setPassword (password)
         End If
     Next i
@@ -57,7 +57,7 @@ End Function
 Public Function getNextInitiate() As clsAccount
     Dim acc As New clsAccount
   
-    If idx = (UBound(initiates) + 1) Then
+    If (idx = (UBound(initiates) + 1)) Then
         Set getNextInitiate = Nothing
         Exit Function
     End If
@@ -75,14 +75,14 @@ Public Sub removeInitiate(initiate As String)
     Dim newAcc() As New clsAccount, found As Boolean, tempIdx As Integer: tempIdx = 0
   
     For i = 0 To UBound(initiates)
-        If LCase(initiates(i).getUsername()) = LCase(initiate) Then
+        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
             found = True
             Exit For
         End If
     Next i
   
-    If found Then
-        If UBound(initiates) = 0 Then
+    If (found) Then
+        If (UBound(initiates) = 0) Then
             initiates(0).setUsername ("")
             initiates(0).setPassword ("")
     
@@ -92,7 +92,7 @@ Public Sub removeInitiate(initiate As String)
         ReDim newAcc(UBound(initiates) - 1)
     
         For i = 0 To UBound(initiates)
-            If LCase(initiates(i).getUsername()) <> LCase(initiate) Then
+            If (LCase(initiates(i).getUsername()) <> LCase(initiate)) Then
                 With newAcc(tempIdx)
                     .setUsername (initiates(i).getUsername())
                     .setPassword (initiates(i).getPassword())
@@ -108,7 +108,7 @@ End Sub
 
 Public Function getAccountByName(name As String) As clsAccount
     For i = 0 To UBound(initiates)
-        If LCase(initiates(i).getUsername()) = LCase(name) Then
+        If (LCase(initiates(i).getUsername()) = LCase(name)) Then
             Set getAccountByName = initiates(i)
             Exit Function
         End If

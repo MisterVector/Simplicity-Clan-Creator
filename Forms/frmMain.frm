@@ -620,37 +620,37 @@ Attribute VB_Exposed = False
 Private Sub btnCheckClanned_Click()
     Dim blClanCreation As Boolean
     
-    If Len(txtInitiate.text) > 14 Or Len(txtInitiate.text) < 2 Then
+    If (Len(txtInitiate.text) > 14 Or Len(txtInitiate.text) < 2) Then
         MsgBox "The initiate name must be between 2 to 14 characters.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If Len(txtChief.text) > 15 Or Len(txtChief.text) < 3 Then
+    If (Len(txtChief.text) > 15 Or Len(txtChief.text) < 3) Then
         MsgBox "The chief's name must be from 3 to 15 characters long.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If Len(txtChiefPass.text) = 0 Then
+    If (Len(txtChiefPass.text) = 0) Then
         MsgBox "Enter a password for the chief.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If Len(txtInitiatesPassword.text) = 0 Then
+    If (Len(txtInitiatesPassword.text) = 0) Then
         MsgBox "Enter a password for the initiates.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If Not IsNumeric(txtReconnectTime.text) Then
+    If (Not IsNumeric(txtReconnectTime.text)) Then
         MsgBox "You must enter a numerical value for the reconnect time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If Not IsNumeric(txtTimeOut.text) Then
+    If (Not IsNumeric(txtTimeOut.text)) Then
         MsgBox "You must enter a numerical value for the time out time.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
     
-    If (cmbServer.text = vbNullString) Then
+    If ((cmbServer.text = vbNullString)) Then
         MsgBox "You must enter a Battle.Net server to connect to.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
@@ -698,7 +698,7 @@ Private Sub btnCheckClanned_Click()
         Or oldInitiateName <> txtInitiate.text)
 
     For i = 0 To sckClanMembers.count - 1
-        If bot(i).proxyIP = vbNullString Then
+        If (bot(i).proxyIP = vbNullString) Then
             proxy = modProxy.getProxy()
           
             With proxy
@@ -707,7 +707,7 @@ Private Sub btnCheckClanned_Click()
                 Version = .Version
             End With
             
-            If IP = vbNullString Then
+            If (IP = vbNullString) Then
                 AddChat vbRed, "No more proxies available."
                 resetAll
                 Exit Sub
@@ -718,7 +718,7 @@ Private Sub btnCheckClanned_Click()
             bot(i).proxyVersion = Version
         End If
 
-        If changeInitiateName Then
+        If (changeInitiateName) Then
             Dim acc As clsAccount
             Set acc = generateInitiate()
       
@@ -726,11 +726,11 @@ Private Sub btnCheckClanned_Click()
             bot(i).password = acc.getPassword()
         End If
     
-        If bot(i).key = vbNullString Then
+        If (bot(i).key = vbNullString) Then
             bot(i).key = keys.getKey(kIdx)
             bot(i).keyIndex = kIdx
       
-            If bot(i).key = vbNullString Then
+            If (bot(i).key = vbNullString) Then
                 MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
         
                 resetAll
@@ -744,7 +744,7 @@ Private Sub btnCheckClanned_Click()
         AddChat vbYellow, "Initiate #" & i & ": Connecting to " & IP & ":" & Port
     Next i
   
-    If chief.proxyIP = vbNullString Then
+    If (chief.proxyIP = vbNullString) Then
         proxy = modProxy.getProxy()
         
         With proxy
@@ -753,7 +753,7 @@ Private Sub btnCheckClanned_Click()
             Version = .Version
         End With
     
-        If IP = vbNullString Then
+        If (IP = vbNullString) Then
             AddChat vbRed, "No more proxies available."
             resetAll
             Exit Sub
@@ -764,11 +764,11 @@ Private Sub btnCheckClanned_Click()
         chief.proxyVersion = Version
     End If
 
-    If chief.key = vbNullString Then
+    If (chief.key = vbNullString) Then
         chief.key = keys.getKey(kIdx)
         chief.keyIndex = kIdx
       
-        If chief.key = vbNullString Then
+        If (chief.key = vbNullString) Then
             MsgBox "No more keys are available. Unable to create a clan.", vbOKOnly Or vbExclamation, PROGRAM_TITLE
       
             resetAll
@@ -788,7 +788,7 @@ End Sub
 Private Sub btnCheckClanTag_Click()
     Dim blCreateClan As Boolean
 
-    If Not isValidClanTag(txtClanTag.text) Then
+    If (Not isValidClanTag(txtClanTag.text)) Then
         MsgBox "Clan tag must be between 2-4 alphanumeric characters.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
     End If
@@ -796,7 +796,7 @@ Private Sub btnCheckClanTag_Click()
     If (txtClanDescription.text = vbNullString) Then
         blCreateClan = MsgBox("Really create the clan without a description?", vbYesNo Or vbQuestion, PROGRAM_TITLE)
     
-        If blCreateClan = vbNo Then Exit Sub
+        If (blCreateClan = vbNo) Then Exit Sub
     End If
 
     config.clanTag = txtClanTag.text
@@ -870,7 +870,7 @@ Private Sub Form_Load()
         For Each IP In arrIPs
             cmbServer.AddItem IP
         
-            If Not realmsString = vbNullString Then
+            If (Not realmsString = vbNullString) Then
                 realmsString = realmsString & "|"
             End If
         
@@ -880,7 +880,7 @@ Private Sub Form_Load()
         dicServerList.Add elem, realmsString
         realmsString = vbNullString
         idx = idx + 1
-        If idx < 4 Then cmbServer.AddItem ""
+        If (idx < 4) Then cmbServer.AddItem ""
     Next
   
     If (Dir$(App.path & "\WAR3", vbDirectory) = vbNullString) Then
@@ -893,7 +893,7 @@ Private Sub Form_Load()
         Exit Sub
     End If
   
-    If loadCustomInitiates() Then
+    If (loadCustomInitiates()) Then
         Dim initiateCount As Integer
         initiateCount = initiateManager.countInitiates()
   
@@ -912,7 +912,7 @@ Private Sub Form_Load()
         End If
     End If
   
-    If Dir(App.path & "\CD-Keys.txt") = vbNullString Then
+    If (Dir(App.path & "\CD-Keys.txt") = vbNullString) Then
         MsgBox "No CD-Keys.txt file found. It will be created for you." & vbNewLine _
             & "Place your Warcraft III keys inside of it.", vbOKOnly Or vbInformation, PROGRAM_TITLE
     
@@ -948,7 +948,7 @@ Private Sub Form_Load()
     bnlsPacketHandler.setup sckBNLS, packetType.BNLS
   
     For i = 0 To 8
-        If i > 0 Then
+        If (i > 0) Then
             Load sckClanMembers(i)
             Load tmrInitiateTimeout(i)
             Load tmrReconnect(i)
@@ -975,7 +975,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    If programLoaded Then
+    If (programLoaded) Then
         With config
             .reconnectTime = txtReconnectTime.text
             .server = cmbServer.text
@@ -1070,9 +1070,9 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
     Dim data As String, pID As Long, pLen As Long
 
     sckChieftain.GetData data
-    If IsChiefProxyPacket(data) Then Exit Sub
+    If (IsChiefProxyPacket(data)) Then Exit Sub
   
-    If Asc(Left(data, 1)) <> &HFF Then
+    If (Asc(Left(data, 1)) <> &HFF) Then
         AddChat vbRed, "Chieftain: Unexpected packet received... disconnecting!"
         chiefError
         Exit Sub
@@ -1082,7 +1082,7 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
         pID = Asc(Mid(data, 2, 1))
     
         CopyMemory pLen, ByVal Mid$(data, 3, 2), 2
-        If pLen = 0 Then Exit Sub
+        If (pLen = 0) Then Exit Sub
         chiefPacketHandler.SetData Mid(data, 5, pLen - 4)
   
         Select Case pID
@@ -1128,9 +1128,9 @@ Private Sub sckClanMembers_DataArrival(index As Integer, ByVal bytesTotal As Lon
     Dim data As String, pID As Long, pLen As Long
   
     sckClanMembers(index).GetData data
-    If IsProxyPacket(index, data) Then Exit Sub
+    If (IsProxyPacket(index, data)) Then Exit Sub
   
-    If Asc(Left(data, 1)) <> &HFF Then
+    If (Asc(Left(data, 1)) <> &HFF) Then
         AddChat vbRed, "Socket #" & index & ": Unexpected packet received... disconnecting!"
         initiateError index
         Exit Sub
@@ -1140,7 +1140,7 @@ Private Sub sckClanMembers_DataArrival(index As Integer, ByVal bytesTotal As Lon
         pID = Asc(Mid(data, 2, 1))
     
         CopyMemory pLen, ByVal Mid$(data, 3, 2), 2
-        If pLen = 0 Then Exit Sub
+        If (pLen = 0) Then Exit Sub
         Packet(index).SetData Mid(data, 5, pLen - 4)
     
         Select Case pID
@@ -1196,7 +1196,7 @@ Private Sub tmrChiefTimeout_Timer()
 End Sub
 
 Private Sub tmrQueue_Timer()
-    If chiefData.getFriendsCount() = 25 Then
+    If (chiefData.getFriendsCount() = 25) Then
         tmrQueue.Enabled = False
       
         MsgBox "Chief's friends list is full. You need to remove some friends to continue.", vbOKOnly Or vbInformation, PROGRAM_TITLE
@@ -1224,8 +1224,8 @@ Private Sub tmrQueue_Timer()
         AddChat vbYellow, "Added " & IIf(bot(botIndex).hasRestrictedKey, "restricted ", "") & "initiate """ & initiate & """ to chief's friends list."
     End If
       
-    If chiefData.isQueueEmpty() Then
-        If chiefData.isReplacingFriends() Then
+    If (chiefData.isQueueEmpty()) Then
+        If (chiefData.isReplacingFriends()) Then
             AddChat vbGreen, "Finished replacing friends on the chieftain's friends list."
             AddChat vbGreen, "You may now check the clan tag."
         Else
@@ -1253,7 +1253,7 @@ Private Sub tmrCheckUpdate_Timer()
   
     versionToCheck = Split(updateString, "Content-Type: text/plain" & vbCrLf & vbCrLf)(1)
 
-    If isNewVersion(versionToCheck) Then
+    If (isNewVersion(versionToCheck)) Then
         updateMsg = "There is a new update for Simplicity!" & vbNewLine & vbNewLine & "Your version: " & PROGRAM_VERSION & " new version: " & versionToCheck & vbNewLine & vbNewLine _
                 & "Would you like to visit the downloads page for updates?"
 
@@ -1269,7 +1269,7 @@ Private Sub tmrCheckUpdate_Timer()
         End If
     End If
 err:
-    If err.Number > 0 Then
+    If (err.Number > 0) Then
         err.Clear
         AddChat vbRed, "Unable to check for update!"
     End If
@@ -1288,7 +1288,7 @@ Public Sub initiateError(ByVal index As Integer)
     
     AddChat vbRed, "Initiate #" & index & ": Connection to proxy failed."
       
-    If bot(index).isReadyForPreparation Then
+    If (bot(index).isReadyForPreparation) Then
         connectedCount = connectedCount - 1
         lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
     End If
@@ -1313,7 +1313,7 @@ Public Sub initiateError(ByVal index As Integer)
             Version = .Version
         End With
     
-        If IP = vbNullString Then
+        If (IP = vbNullString) Then
             AddChat vbRed, "No more proxies available."
             resetAll
             Exit Sub
@@ -1339,11 +1339,11 @@ Public Sub chiefError()
     tmrChiefTimeout.Enabled = False
     sckChieftain.Close
       
-    If chiefData.isQueueEnabled Then
+    If (chiefData.isQueueEnabled) Then
         tmrQueue.Enabled = False
     End If
       
-    If chief.isReadyForPreparation Then
+    If (chief.isReadyForPreparation) Then
         connectedCount = connectedCount - 1
         lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
     End If
@@ -1368,7 +1368,7 @@ Public Sub chiefError()
             Version = .Version
         End With
       
-        If IP = vbNullString Then
+        If (IP = vbNullString) Then
             AddChat vbRed, "No more proxies available."
             resetAll
             Exit Sub
