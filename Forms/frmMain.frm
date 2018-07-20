@@ -561,6 +561,7 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -883,12 +884,17 @@ Private Sub Form_Load()
         If (idx < 4) Then cmbServer.AddItem vbNullString
     Next
   
-    If (Dir$(App.path & "\WAR3", vbDirectory) = vbNullString) Then
-        MkDir App.path & "\WAR3"
-    End If
-  
     If (Dir(App.path & "\WAR3\Warcraft III.exe") = vbNullString) Then
-        MsgBox "Place Warcraft III.exe in the WAR3 folder, then run this program again.", vbOKOnly Or vbInformation, PROGRAM_TITLE
+        Dim notFoundMessage As String
+    
+        notFoundMessage = "Place Warcraft III.exe in the WAR3 folder, then run this program again."
+    
+        If (Dir$(App.path & "\WAR3", vbDirectory) = vbNullString) Then
+            MkDir App.path & "\WAR3"
+            notFoundMessage = notFoundMessage & vbNewLine & "The WAR3 folder has just been created for you."
+        End If
+  
+        MsgBox notFoundMessage, vbOKOnly Or vbInformation, PROGRAM_TITLE
         unloadAll
         Exit Sub
     End If
