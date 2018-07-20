@@ -1,4 +1,33 @@
-Version 1.2 - April 17, 2018
+Version 1.3.0 - Released on July 19, 2018
+
+  - Default BNLS set to jbls.codespeak.org
+  - Added a menu system
+  - Added an about window
+  - The CheckRevision library has been renamed to VersionCheck.dll
+  - This is the first version to use semantic versioning!
+  - Message boxes were not being shown properly
+  - Added a "Check for Update" menu item to manually check for updates
+  - Insufficient clan tag length message box icon changed from exclamation
+    to information
+  - Added an option to check for update on startup, defaults to on
+  - Name of author removed from main window title
+  - When configuration not found when starting the program, default values are
+    now applied to the following settings:
+    - Remembering window position
+    - Saving clan info
+    - Using custom initiates
+  - If the WAR3 folder is not found while loading, the hashes not found
+    message will explain that the WAR3 folder was created
+  - Updated readme
+  - Updated changelog to be more consistent with other project changelogs
+  - Menu structure
+    - File
+      - Quit
+    - Help
+      - About
+      - Check for Update
+
+Version 1.2 - Released on April 17, 2018
 
   - Simplicity will send a custom user agent when checking for updates
   - More accurate error reporting when Warcraft III hashes are out of date
@@ -36,7 +65,7 @@ Version 1.2 - April 17, 2018
   - When loading Simplicity, if no keys or proxies were found their corresponding
     loaded messages will not show
 
-Version 1.1 - January 10, 2018
+Version 1.1 - Released on January 10, 2018
 
   - Updated reference of war3.exe to Warcraft III.exe
   - Fixed an issue where clans whose tags were less than 4 characters were
@@ -52,12 +81,12 @@ Version 1.1 - January 10, 2018
   - Changelog removed from readme and added to changelog.txt
   - Updated readme
 
-Version 1.01 - July 19, 2017
+Version 1.01 - Released on July 19, 2017
 
   - Updated Warcraft III version byte to 0x1C
   - Update check location change
 
-Version 1.0 - October 30, 2016
+Version 1.0 - Released on October 30, 2016
 
   - Simplicity no longer attempts to probe the chief / initiates (an issue
     with a Battle.Net maintenance caused some servers to not work properly)
@@ -105,26 +134,26 @@ Version 1.0 - October 30, 2016
   - If Simplicity runs out of proxies, it will no longer try to connect to a blank proxy
     when attempting to reconnect with "Check Keys"
 
-Version 0.72 - November 1, 2012
+Version 0.72 - Released on November 1, 2012
 
   - New IP list for Europe
   - Corrected a problem that when Simplicity checked for a new version, if
     it was the same verison, an update notification would show anyway
 
-Version 0.71 - September 11, 2012
+Version 0.71 - Released on September 11, 2012
 
   - Some code improvement
   - Emergency update for new west IPs
   - I pay my respect to the men and women who lost their lives on this day 11 years ago
 
-Version 0.7 - August 17, 2012
+Version 0.7 - Released on August 17, 2012
 
   - Slight code improvement in different areas 
   - Updated USEast's IP list, since they changed when Azeroth was put on new hardware
   - Simplicity checks to see if valid BNCS packets get received, else it reconnects on a new proxy
   - Missing a message for if the initiates are already part of a clan
 
-Version 0.6 - May 24, 2012
+Version 0.6 - Released on May 24, 2012
 
   - Fixed an RTE that prevented some users from running Simplicity
   - Separated the disconnect and proxy reload behavior into separate buttons
@@ -152,7 +181,7 @@ Version 0.6 - May 24, 2012
   - Fixed the "unable to decode CD-Keys" error having to do with spaces in CDKeys.txt file
   - Created by is now by Vector, not Vector@USEast
 
-Version 0.5 - March 17, 2012
+Version 0.5 - Released on March 17, 2012
 
   - Fixed a bug that caused CreatedClans.txt to not show the realm name (and use an IP instead) if the
     server selected was not useast.battle.net
@@ -170,7 +199,7 @@ Version 0.5 - March 17, 2012
     (this could cause confusion if your password ended with a period)
 
 
-Version 0.4 - August 13, 2011
+Version 0.4 - Released on August 13, 2011
 
   - The initiate queue is disabled when the chief disconnects, and re-enabled when
     it comes back online
@@ -197,12 +226,12 @@ Version 0.4 - August 13, 2011
     will come up allowing you to remove friends from the chief's friends list
   - Updated readme
 
-Version 0.3 - July 21, 2011
+Version 0.3 - Released on July 21, 2011
 
   - Initiate preview is updated when you tick the check box
   - Fixed an Overflow error when loading proxies that have a port greater than 32,767
 
-Version 0.2 - July 18, 2011
+Version 0.2 - Released on July 18, 2011
 
   - Fixed all the tab indexes so the tab key works properly
   - Fixed problem where voided initiates weren't added to chief's friends list if the chief
@@ -210,6 +239,6 @@ Version 0.2 - July 18, 2011
   - UI enhancement, making it more user friendly
   - Updated readme a bit
 
-Version 0.1 - July 17, 2011
+Version 0.1 - Released on July 17, 2011
 
   - First release of Simplicity!
