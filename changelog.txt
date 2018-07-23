@@ -1,3 +1,10 @@
+Version 1.3.1 - Released on July 22, 2018
+
+  - Fixed Run Time Error 13 while using HTTP proxies
+  - Internal changes to gain some performance
+  - All options are now disabled during clan creation routine
+    and re-enabled when stopped, for consistency
+
 Version 1.3.0 - Released on July 19, 2018
 
   - Default BNLS set to jbls.codespeak.org
