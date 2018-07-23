@@ -74,7 +74,7 @@ End Sub
 
 Public Function getBotIndexByName(ByVal user As String) As Integer
     For i = 0 To 8
-        If (LCase(bot(i).username) = LCase(user)) Then
+        If (LCase$(bot(i).username) = LCase$(user)) Then
             getBotIndexByName = i
             Exit Function
         End If
@@ -130,25 +130,25 @@ End Function
 
 Public Function IsProxyPacket(index As Integer, ByVal data As String) As Boolean
     Select Case Mid$(data, 1, 2)
-        Case Chr(&H0) & Chr(&H5A): 'Accepted
+        Case Chr$(&H0) & Chr$(&H5A): 'Accepted
             frmMain.sckClanMembers(index).SendData Chr$(&H1)
             Send0x50 index
             IsProxyPacket = True
             Exit Function
-        Case Chr(&H0) & Chr(&H5B): 'Denied
+        Case Chr$(&H0) & Chr$(&H5B): 'Denied
             IsProxyPacket = True
-        Case Chr(&H0) & Chr(&H5C): 'Rejected
+        Case Chr$(&H0) & Chr$(&H5C): 'Rejected
             IsProxyPacket = True
-        Case Chr(&H0) & Chr(&H5D): 'Rejected
+        Case Chr$(&H0) & Chr$(&H5D): 'Rejected
             IsProxyPacket = True
     End Select
 
     If (Not IsProxyPacket) Then
-        If (Len(data) >= 12 And LCase$(Left(data, 4)) = "http") Then
+        If (Len(data) >= 12 And LCase$(Left$(data, 4)) = "http") Then
             Dim packetOutput As String
             Dim responseCode As String
       
-            responseCode = Mid(data, 10, 3)
+            responseCode = Mid$(data, 10, 3)
     
             Select Case responseCode
                 Case "200"
@@ -165,25 +165,25 @@ End Function
 
 Public Function IsChiefProxyPacket(ByVal data As String) As Boolean
     Select Case Mid$(data, 1, 2)
-        Case Chr(&H0) & Chr(&H5A): 'Accepted
+        Case Chr$(&H0) & Chr$(&H5A): 'Accepted
             frmMain.sckChieftain.SendData Chr$(&H1)
             Chief_Send0x50
             IsChiefProxyPacket = True
             Exit Function
-        Case Chr(&H0) & Chr(&H5B): 'Denied
+        Case Chr$(&H0) & Chr$(&H5B): 'Denied
             IsChiefProxyPacket = True
-        Case Chr(&H0) & Chr(&H5C): 'Rejected
+        Case Chr$(&H0) & Chr$(&H5C): 'Rejected
             IsChiefProxyPacket = True
-        Case Chr(&H0) & Chr(&H5D): 'Rejected
+        Case Chr$(&H0) & Chr$(&H5D): 'Rejected
             IsChiefProxyPacket = True
     End Select
 
     If (Not IsChiefProxyPacket) Then
-        If (Len(data) >= 12 And LCase(Left(data, 4)) = "http") Then
+        If (Len(data) >= 12 And LCase$(Left$(data, 4)) = "http") Then
             Dim packetOutput As String
             Dim responseCode As String
       
-            responseCode = Mid(data, 10, 3)
+            responseCode = Mid$(data, 10, 3)
     
             Select Case responseCode
                 Case "200"
@@ -202,7 +202,7 @@ Public Function getRealmName(ByVal serverConfig As String) As String
     Dim tempServer As String, IPs() As String, doExit As Boolean
   
     For Each key In dicServerList.keys
-        If (LCase(key) = LCase(serverConfig)) Then
+        If (LCase$(key) = LCase$(serverConfig)) Then
             tempServer = key
             Exit For
         End If
@@ -233,8 +233,8 @@ End Function
 Public Function KillNull(ByVal text As String) As String
     Dim findNull As Integer
   
-    findNull = InStr(text, Chr(0))
-    KillNull = IIf(findNull > 0, Mid(text, 1, findNull - 1), text)
+    findNull = InStr(text, Chr$(0))
+    KillNull = IIf(findNull > 0, Mid$(text, 1, findNull - 1), text)
 End Function
 
 Public Sub unloadAll()

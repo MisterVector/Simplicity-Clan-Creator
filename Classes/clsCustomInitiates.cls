@@ -20,7 +20,7 @@ End Sub
 
 Public Function addCustomInitiate(initiate As String, password As String) As Boolean
     For i = 0 To UBound(initiates)
-        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
+        If (LCase$(initiates(i).getUsername()) = LCase$(initiate)) Then
             addCustomInitiate = False
             Exit Function
         End If
@@ -40,7 +40,7 @@ End Function
 
 Public Sub updateInitiate(initiate As String, password As String)
     For i = 0 To UBound(initiates)
-        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
+        If (LCase$(initiates(i).getUsername()) = LCase$(initiate)) Then
             initiates(i).setPassword (password)
         End If
     Next i
@@ -75,7 +75,7 @@ Public Sub removeInitiate(initiate As String)
     Dim newAcc() As New clsAccount, found As Boolean, tempIdx As Integer: tempIdx = 0
   
     For i = 0 To UBound(initiates)
-        If (LCase(initiates(i).getUsername()) = LCase(initiate)) Then
+        If (LCase$(initiates(i).getUsername()) = LCase$(initiate)) Then
             found = True
             Exit For
         End If
@@ -92,7 +92,7 @@ Public Sub removeInitiate(initiate As String)
         ReDim newAcc(UBound(initiates) - 1)
     
         For i = 0 To UBound(initiates)
-            If (LCase(initiates(i).getUsername()) <> LCase(initiate)) Then
+            If (LCase$(initiates(i).getUsername()) <> LCase$(initiate)) Then
                 With newAcc(tempIdx)
                     .setUsername (initiates(i).getUsername())
                     .setPassword (initiates(i).getPassword())
@@ -108,7 +108,7 @@ End Sub
 
 Public Function getAccountByName(name As String) As clsAccount
     For i = 0 To UBound(initiates)
-        If (LCase(initiates(i).getUsername()) = LCase(name)) Then
+        If (LCase$(initiates(i).getUsername()) = LCase$(name)) Then
             Set getAccountByName = initiates(i)
             Exit Function
         End If

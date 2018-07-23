@@ -5,7 +5,7 @@ Public Sub loadConfig()
     Dim tVal As Variant
   
     tVal = ReadINI("Window", "RememberWindowPosition", "Config.ini")
-    config.rememberWindowPosition = (UCase(tVal) = "Y")
+    config.rememberWindowPosition = (UCase$(tVal) = "Y")
   
     If (tVal = vbNullString) Then
         config.rememberWindowPosition = DEFAULT_REMEMBER_WINDOW_POSITION
@@ -94,7 +94,7 @@ Public Sub loadConfig()
     End If
   
     tVal = ReadINI("Main", "SaveClanInfo", "Config.ini")
-    config.saveClanInfo = (UCase(tVal) = "Y")
+    config.saveClanInfo = (UCase$(tVal) = "Y")
   
     If (tVal = vbNullString) Then
         config.saveClanInfo = DEFAULT_SAVE_CLAN_INFO
@@ -105,7 +105,7 @@ Public Sub loadConfig()
     End If
   
     tVal = ReadINI("Main", "UseCustomInitiates", "Config.ini")
-    config.useCustomInitiates = (UCase(tVal) = "Y")
+    config.useCustomInitiates = (UCase$(tVal) = "Y")
     
     If (tVal = vbNullString) Then
         config.useCustomInitiates = DEFAULT_USE_CUSTOM_INITIATES
@@ -116,7 +116,7 @@ Public Sub loadConfig()
     End If
     
     tVal = ReadINI("Main", "CheckUpdateOnStartup", "Config.ini")
-    config.checkUpdateOnStartup = (UCase(tVal) = "Y")
+    config.checkUpdateOnStartup = (UCase$(tVal) = "Y")
     
     If (tVal = vbNullString) Then
         config.checkUpdateOnStartup = DEFAULT_CHECK_UPDATE_ON_STARTUP
@@ -210,7 +210,7 @@ Public Function loadProxies() As Boolean
 
             For i = 0 To UBound(tProxies)
                 If (tProxies(i) <> vbNullString) Then
-                    tProxies(i) = Trim(tProxies(i))
+                    tProxies(i) = Trim$(tProxies(i))
                     
                     If (InStr(tProxies(i), ":")) Then
                         IP = Split(tProxies(i), ":")(0)

@@ -561,7 +561,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -1078,18 +1077,18 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
     sckChieftain.GetData data
     If (IsChiefProxyPacket(data)) Then Exit Sub
   
-    If (Asc(Left(data, 1)) <> &HFF) Then
+    If (Asc(Left$(data, 1)) <> &HFF) Then
         AddChat vbRed, "Chieftain: Unexpected packet received... disconnecting!"
         chiefError
         Exit Sub
     End If
   
     Do While Len(data) > 3
-        pID = Asc(Mid(data, 2, 1))
+        pID = Asc(Mid$(data, 2, 1))
     
         CopyMemory pLen, ByVal Mid$(data, 3, 2), 2
         If (pLen = 0) Then Exit Sub
-        chiefPacketHandler.SetData Mid(data, 5, pLen - 4)
+        chiefPacketHandler.SetData Mid$(data, 5, pLen - 4)
   
         Select Case pID
             Case &H0: Chief_Recv0x00
@@ -1107,7 +1106,7 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
             Case &H72: Chief_Recv0x72
         End Select
   
-        data = Mid(data, pLen + 1)
+        data = Mid$(data, pLen + 1)
     Loop
 End Sub
 
@@ -1136,18 +1135,18 @@ Private Sub sckClanMembers_DataArrival(index As Integer, ByVal bytesTotal As Lon
     sckClanMembers(index).GetData data
     If (IsProxyPacket(index, data)) Then Exit Sub
   
-    If (Asc(Left(data, 1)) <> &HFF) Then
+    If (Asc(Left$(data, 1)) <> &HFF) Then
         AddChat vbRed, "Socket #" & index & ": Unexpected packet received... disconnecting!"
         initiateError index
         Exit Sub
     End If
   
     Do While Len(data) > 3
-        pID = Asc(Mid(data, 2, 1))
+        pID = Asc(Mid$(data, 2, 1))
     
         CopyMemory pLen, ByVal Mid$(data, 3, 2), 2
         If (pLen = 0) Then Exit Sub
-        Packet(index).SetData Mid(data, 5, pLen - 4)
+        Packet(index).SetData Mid$(data, 5, pLen - 4)
     
         Select Case pID
             Case &H0: Recv0x00 index
@@ -1164,7 +1163,7 @@ Private Sub sckClanMembers_DataArrival(index As Integer, ByVal bytesTotal As Lon
             Case &H72: Recv0x72 index
         End Select
     
-        data = Mid(data, pLen + 1)
+        data = Mid$(data, pLen + 1)
     Loop
 End Sub
 
@@ -1296,7 +1295,7 @@ Public Sub initiateError(ByVal index As Integer)
       
     If (bot(index).isReadyForPreparation) Then
         connectedCount = connectedCount - 1
-        lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
+        lblConnected.Caption = "Connected: " & Right$(" " & connectedCount, 2)
     End If
   
     bot(index).isReadyForPreparation = False
@@ -1351,7 +1350,7 @@ Public Sub chiefError()
       
     If (chief.isReadyForPreparation) Then
         connectedCount = connectedCount - 1
-        lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
+        lblConnected.Caption = "Connected: " & Right$(" " & connectedCount, 2)
     End If
     
     chief.isReadyForPreparation = False

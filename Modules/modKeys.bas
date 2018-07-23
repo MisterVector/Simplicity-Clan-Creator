@@ -12,7 +12,7 @@ Public Function loadCDKeys() As Boolean
         Close #1
   
         For i = 0 To UBound(arrKeys)
-            arrKeys(i) = UCase(Trim(arrKeys(i)))
+            arrKeys(i) = UCase$(Trim$(arrKeys(i)))
     
             If (arrKeys(i) <> vbNullString) Then
                 If (Not tmp.Exists(arrKeys(i))) Then

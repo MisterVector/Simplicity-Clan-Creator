@@ -17,11 +17,11 @@ Public Sub RECV_BNLS_0x10()
         verByte = bnlsPacketHandler.GetDWORD
   
         config.verByte = verByte
-        WriteINI "Main", "VerByte", Hex(verByte), "Config.ini"
+        WriteINI "Main", "VerByte", Hex$(verByte), "Config.ini"
     
         attemptedVerByteUpdate = True
     
-        AddChat vbGreen, "Updated version byte to 0x" & Hex(verByte) & "!"
+        AddChat vbGreen, "Updated version byte to 0x" & Hex$(verByte) & "!"
         AddChat vbGreen, "You may now click ""Check Keys"" to begin checking again."
     Else
         AddChat vbRed, "Could not update version byte!"

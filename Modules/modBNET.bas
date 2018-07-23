@@ -181,7 +181,7 @@ Public Sub Send0x53(index As Integer)
         Exit Sub
     End If
 
-    nls_A = Space(Len(bot(index).username) + 33)
+    nls_A = Space$(Len(bot(index).username) + 33)
     
     If (nls_account_logon(bot(index).nls_P, nls_A) = 0) Then
         MsgBox "Unable to create NLS key.", vbOKOnly Or vbCritical, PROGRAM_TITLE
@@ -206,7 +206,7 @@ Public Sub Recv0x53(index As Integer)
 End Sub
 
 Public Sub Send0x52(index As Integer)
-    Dim SaltHash As String: SaltHash = Space(Len(bot(index).username) + 65)
+    Dim SaltHash As String: SaltHash = Space$(Len(bot(index).username) + 65)
 
     If (nls_account_create(bot(index).nls_P, SaltHash) = 0) Then
         MsgBox "Unable to create NLS salt.", vbOKOnly Or vbCritical, PROGRAM_TITLE  'Unable to create salt
@@ -293,7 +293,7 @@ Public Sub Recv0x65(index As Integer)
             For i = 0 To friendsCount - 1
                 curFriend = .getNTString
         
-                If (LCase(curFriend) = LCase(chief.username)) Then
+                If (LCase$(curFriend) = LCase$(chief.username)) Then
                     bot(index).hasChieftainAsFriend = True
                 End If
         
@@ -312,7 +312,7 @@ Public Sub Send0x70(index As Integer)
     Dim sendTag As String
   
     For i = 0 To 3
-        sendTag = sendTag & Chr$(Asc(Mid(clannedKeyCheckClan, i + 1, 1)))
+        sendTag = sendTag & Chr$(Asc(Mid$(clannedKeyCheckClan, i + 1, 1)))
     Next i
  
     With Packet(index)
@@ -335,7 +335,7 @@ Public Sub Recv0x70(index As Integer)
             bot(index).isReadyForPreparation = True
       
             connectedCount = connectedCount + 1
-            frmMain.lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
+            frmMain.lblConnected.Caption = "Connected: " & Right$(" " & connectedCount, 2)
       
             Dim readyCount As Integer
             readyCount = countReadyForPreparation()

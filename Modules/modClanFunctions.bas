@@ -7,7 +7,7 @@ Public Function generateClannedKeyCheckClan() As String
         idx = Int(Rnd(GetTickCount()) * Len(alphanumeric))
         If (idx = 0) Then idx = 1
   
-        final = final & Mid(alphanumeric, idx, 1)
+        final = final & Mid$(alphanumeric, idx, 1)
     Next i
   
     generateClannedKeyCheckClan = final
@@ -65,7 +65,7 @@ Public Sub disconnectInitiate(ByVal index As Integer)
   
     If (bot(index).isReadyForPreparation) Then
         connectedCount = connectedCount - 1
-        frmMain.lblConnected.Caption = "Connected: " & Right(" " & connectedCount, 2)
+        frmMain.lblConnected.Caption = "Connected: " & Right$(" " & connectedCount, 2)
     End If
   
     bot(index).isReadyForPreparation = False
@@ -109,7 +109,7 @@ End Sub
 
 Public Function isInitiate(name As String) As Boolean
     For i = 0 To 8
-        If (LCase(bot(i).username) = LCase(name)) Then
+        If (LCase$(bot(i).username) = LCase$(name)) Then
             isInitiate = True
             Exit Function
         End If
@@ -129,7 +129,7 @@ Public Function isValidClanTag(clanTag As String) As Boolean
     End If
 
     For i = 1 To lenTag
-        ch = Mid(clanTag, i, 1)
+        ch = Mid$(clanTag, i, 1)
         ascii = Asc(ch)
     
         If (Not IsNumeric(ch) And Not ((ascii >= 65 And ascii <= 90) Or (ascii >= 97 And ascii <= 122))) Then

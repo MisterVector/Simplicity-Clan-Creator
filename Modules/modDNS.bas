@@ -45,7 +45,7 @@ Public Function Resolve(sAddr As String) As String
             
             If (uRecord.wType = DNS_TYPE_A) Then
                 lPtr = inet_ntoa(uRecord.prt)
-                sName = String(lstrlen(lPtr), 0)
+                sName = String$(lstrlen(lPtr), 0)
                 Call CopyMemory(ByVal sName, lPtr, Len(sName))
                 
                 If (LenB(Resolve) <> 0) Then

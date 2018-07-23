@@ -15,11 +15,11 @@ Public Function ReadINI(ByVal cSection As String, ByVal cKey As String, ByVal cP
     Dim cBuff As String, cLen As Long
   
     cPath = App.path & "\" & cPath
-    cBuff = String(255, vbNull)
-    cLen = GetPrivateProfileString(cSection, cKey, Chr(0), cBuff, 255, cPath)
+    cBuff = String$(255, vbNull)
+    cLen = GetPrivateProfileString(cSection, cKey, Chr$(0), cBuff, 255, cPath)
   
     If (cLen > 0) Then
-        ReadINI = Left(cBuff, cLen) 'Split(cBuff, Chr$(0))(0)
+        ReadINI = Left$(cBuff, cLen) 'Split(cBuff, Chr$(0))(0)
     Else
         ReadINI = vbNullString
     End If
