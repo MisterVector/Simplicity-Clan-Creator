@@ -661,6 +661,9 @@ Private Sub btnCheckClanned_Click()
     btnRefresh.Enabled = True
     btnRefreshKeys.Enabled = False
     cmdResetProxies.Enabled = False
+    chkRememberWindowPosition.Enabled = False
+    chkSaveClanInfo.Enabled = False
+    chkCheckUpdateOnStartup.Enabled = False
      
     cmbServer.Enabled = False
     txtBNLSServer.Enabled = False

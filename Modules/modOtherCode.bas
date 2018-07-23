@@ -56,7 +56,10 @@ Public Sub resetAll(Optional ByVal supressMessage As Boolean = False)
     frmMain.txtInitiatesPassword.Enabled = True
     
     frmMain.chkCustomInitiates.Enabled = True
-    
+    frmMain.chkCheckUpdateOnStartup.Enabled = True
+    frmMain.chkRememberWindowPosition.Enabled = True
+    frmMain.chkSaveClanInfo.Enabled = True
+
     chief.loggedOn = False
     chief.hasDoneProcedure = False
     chief.isReadyForPreparation = False
