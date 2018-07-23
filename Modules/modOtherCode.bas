@@ -144,7 +144,7 @@ Public Function IsProxyPacket(index As Integer, ByVal data As String) As Boolean
     End Select
 
     If (Not IsProxyPacket) Then
-        If (Len(data) >= 12 And LCase(Left(data, 4))) = "http" Then
+        If (Len(data) >= 12 And LCase$(Left(data, 4)) = "http") Then
             Dim packetOutput As String
             Dim responseCode As String
       
