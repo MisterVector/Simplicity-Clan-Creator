@@ -388,11 +388,15 @@ Public Sub Recv0x0F(index As Integer)
     End With
     
     If (ID = &H7) Then
-        If (text <> config.Channel) Then
-            bot(index).hasRestrictedKey = True
+        If (Not bot(index).hasCheckedKey) Then
+            If (text <> config.Channel) Then
+                bot(index).hasRestrictedKey = True
+            End If
+    
+            Send0x65 index
+            
+            bot(index).hasCheckedKey = True
         End If
-
-        Send0x65 index
     End If
 End Sub
 
@@ -405,6 +409,8 @@ Public Sub Send0x0A(index As Integer)
 End Sub
 
 Public Sub Send0x0C(index As Integer)
+    bot(index).hasCheckedKey = False
+
     With Packet(index)
         .InsertDWORD &H2
         .InsertNTString config.Channel

@@ -100,6 +100,7 @@ Public Type ClientData
     isReadyForPreparation As Boolean
     hasDoneProcedure As Boolean
     loggedOn As Boolean
+    hasCheckedKey As Boolean
 End Type
 Public bot() As ClientData
 Public chief As ClientData

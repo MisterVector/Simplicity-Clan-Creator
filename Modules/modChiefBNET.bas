@@ -458,11 +458,15 @@ Public Sub Chief_Recv0x0F()
     End With
     
     If (ID = &H7) Then
-        If (text <> config.Channel) Then
-            chief.hasRestrictedKey = True
+        If (Not chief.hasCheckedKey) Then
+            If (text <> config.Channel) Then
+                chief.hasRestrictedKey = True
+            End If
+            
+            Chief_Send0x65
+            
+            chief.hasCheckedKey = True
         End If
-        
-        Chief_Send0x65
     End If
 End Sub
 
@@ -475,6 +479,8 @@ Public Sub Chief_Send0x0A()
 End Sub
 
 Public Sub Chief_Send0x0C()
+    chief.hasCheckedKey = False
+
     With chiefPacketHandler
         .InsertDWORD &H2
         .InsertNTString config.Channel
