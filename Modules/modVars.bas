@@ -76,8 +76,8 @@ Public Type ConfigType
     
     checkUpdateOnStartup As Boolean
     rememberWindowPosition As Boolean
-    windowTop As Integer
-    windowLeft As Integer
+    windowTop As Long
+    windowLeft As Long
 End Type
 Public config As ConfigType
 
