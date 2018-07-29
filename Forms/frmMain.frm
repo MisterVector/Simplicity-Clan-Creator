@@ -561,6 +561,7 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -1096,8 +1097,8 @@ Private Sub sckChieftain_DataArrival(ByVal bytesTotal As Long)
         Select Case pID
             Case &H0: Chief_Recv0x00
             Case &HA: Chief_Recv0x0A
+            Case &HF: Chief_Recv0x0F
             Case &H25: Chief_Recv0x25
-            Case &H46: Chief_Recv0x46
             Case &H50: Chief_Recv0x50
             Case &H51: Chief_Recv0x51
             Case &H52: Chief_Recv0x52
@@ -1154,8 +1155,8 @@ Private Sub sckClanMembers_DataArrival(index As Integer, ByVal bytesTotal As Lon
         Select Case pID
             Case &H0: Recv0x00 index
             Case &HA: Recv0x0A index
+            Case &HF: Recv0x0F index
             Case &H25: Recv0x25 index
-            Case &H46: Recv0x46 index
             Case &H50: Recv0x50 index
             Case &H51: Recv0x51 index
             Case &H52: Recv0x52 index

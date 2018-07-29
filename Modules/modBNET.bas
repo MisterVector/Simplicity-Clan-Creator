@@ -149,27 +149,6 @@ Public Sub Recv0x51(index As Integer)
     End If
 End Sub
 
-'// SID_NEWS
-Public Sub Send0x46(index As Integer)
-    Packet(index).InsertDWORD &HFFFFFFFF
-    Packet(index).sendPacket &H46
-End Sub
-
-'// SID_NEWS
-Public Sub Recv0x46(index As Integer)
-    Dim dumpedPacket As String
-    
-    Packet(index).Skip 13
-    dumpedPacket = Packet(index).getPacket
-    
-    If (InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
-            Or InStr(dumpedPacket, "Your account is muted.")) > 0 Then
-        bot(index).hasRestrictedKey = True
-    End If
-  
-    Send0x65 index
-End Sub
-
 Public Sub Send0x53(index As Integer)
     Dim nls_A As String
 
@@ -274,7 +253,7 @@ Public Sub Recv0x54(index As Integer)
 Continue:
     nls_free (bot(index).nls_P)        'Unloads the NLS object to avoid overhead
 
-    Send0xAC index
+    Send0x0A index
 End Sub
 
 Public Sub Send0x65(index As Integer)
@@ -397,12 +376,36 @@ Public Sub Recv0x72(index As Integer)
     End With
 End Sub
 
-Public Sub Send0xAC(index As Integer)
+Public Sub Recv0x0F(index As Integer)
+    Dim ID As Long, text As String
+    
+    ID = Packet(index).GetDWORD
+    
+    With Packet(index)
+        .Skip 20
+        .getNTString
+        text = .getNTString
+    End With
+    
+    If (ID = &H7) Then
+        If (text <> config.Channel) Then
+            bot(index).hasRestrictedKey = True
+        End If
+
+        Send0x65 index
+    End If
+End Sub
+
+Public Sub Send0x0A(index As Integer)
     With Packet(index)
         .InsertNTString bot(index).username
         .InsertByte &H0
         .sendPacket &HA
+    End With
+End Sub
 
+Public Sub Send0x0C(index As Integer)
+    With Packet(index)
         .InsertDWORD &H2
         .InsertNTString config.Channel
         .sendPacket &HC
@@ -411,6 +414,7 @@ End Sub
 
 Public Sub Recv0x0A(index As Integer)
     AddChat vbGreen, "Initiate #" & index & ": Logged into Battle.Net!"
-    Send0x46 index
+    
+    Send0x0C index
 End Sub
 

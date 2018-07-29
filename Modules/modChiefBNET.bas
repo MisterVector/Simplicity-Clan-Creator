@@ -149,25 +149,6 @@ Public Sub Chief_Recv0x51()
     End If
 End Sub
 
-Public Sub Chief_Send0x46()
-    chiefPacketHandler.InsertDWORD &HFFFFFFFF
-    chiefPacketHandler.sendPacket &H46
-End Sub
-
-Public Sub Chief_Recv0x46()
-    Dim dumpedPacket As String
-
-    chiefPacketHandler.Skip 13
-    dumpedPacket = chiefPacketHandler.getPacket
-   
-    If (InStr(dumpedPacket, "Your account has had all chat privileges suspended.") > 0 _
-            Or InStr(dumpedPacket, "Your account has had all chat privileges suspended.")) > 0 Then
-        chief.hasRestrictedKey = True
-    End If
-  
-    Chief_Send0x65
-End Sub
-
 Public Sub Chief_Send0x53()
     Dim nls_A As String
 
@@ -257,7 +238,7 @@ Continue:
 
     nls_free (chief.nls_P)
 
-    Chief_Send0xAC
+    Chief_Send0x0A
 End Sub
 
 Public Sub Chief_Send0x65()
@@ -465,12 +446,36 @@ Public Sub Chief_Recv0x72()
     End With
 End Sub
 
-Public Sub Chief_Send0xAC()
+Public Sub Chief_Recv0x0F()
+    Dim ID As Long, text As String
+    
+    ID = chiefPacketHandler.GetDWORD
+    
     With chiefPacketHandler
-        .InsertNTString chief.username
+        .Skip 20
+        .getNTString
+        text = .getNTString
+    End With
+    
+    If (ID = &H7) Then
+        If (text <> config.Channel) Then
+            chief.hasRestrictedKey = True
+        End If
+        
+        Chief_Send0x65
+    End If
+End Sub
+
+Public Sub Chief_Send0x0A()
+    With chiefPacketHandler
+        .InsertNTString bot(index).username
         .InsertByte &H0
         .sendPacket &HA
+    End With
+End Sub
 
+Public Sub Chief_Send0x0C()
+    With chiefPacketHandler
         .InsertDWORD &H2
         .InsertNTString config.Channel
         .sendPacket &HC
@@ -480,6 +485,6 @@ End Sub
 Public Sub Chief_Recv0x0A()
     AddChat vbGreen, "Chieftain: Logged into Battle.Net!"
   
-    Chief_Send0x46
+    Chief_Send0x0C
 End Sub
 
