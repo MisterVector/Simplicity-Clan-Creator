@@ -621,6 +621,11 @@ Attribute VB_Exposed = False
 Private Sub btnCheckClanned_Click()
     Dim blClanCreation As Boolean
     
+    If (Len(txtChannel.text) = 0 Or LCase(txtChannel.text) = "the void") Then
+        MsgBox "Channel name must not be blank and cannot be ""The Void"".", vbOKOnly Or vbInformation, PROGRAM_TITLE
+        Exit Sub
+    End If
+    
     If (Len(txtInitiate.text) > 14 Or Len(txtInitiate.text) < 2) Then
         MsgBox "The initiate name must be between 2 to 14 characters.", vbOKOnly Or vbInformation, PROGRAM_TITLE
         Exit Sub
