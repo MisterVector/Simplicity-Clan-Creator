@@ -10,7 +10,7 @@ Public Const DEFAULT_CHANNEL                  As String = "Simplicity"
 Public Const DEFAULT_CONNECTIONS_PER_PROXY    As Integer = 4
 Public Const DEFAULT_TIMEOUT                  As Integer = 10000
 Public Const DEFAULT_RECONNECT_TIME           As Integer = 12000
-Public Const DEFAULT_VERSION_BYTE             As Long = &H1D
+Public Const DEFAULT_VERSION_BYTE             As Long = &H1E
 
 Public Const DEFAULT_REMEMBER_WINDOW_POSITION As Boolean = False
 Public Const DEFAULT_SAVE_CLAN_INFO           As Boolean = True
