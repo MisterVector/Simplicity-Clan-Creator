@@ -102,3 +102,7 @@ End Sub
 Private Sub lblWebsite_Click()
     ShellExecute 0, "open", "http://www.codespeak.org", vbNullString, vbNullString, 4
 End Sub
+
+Private Sub lblWebsite_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
+End Sub

@@ -1,5 +1,9 @@
 Attribute VB_Name = "modGeneralAPI"
+Public Const IDC_HAND As Long = 32649&
+
 Public Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (lpvDest As Any, lpvSource As Any, ByVal cbCopy As Long)
+Public Declare Function SetCursor Lib "user32" (ByVal hCursor As Long) As Long
+Public Declare Function LoadCursor Lib "user32" Alias "LoadCursorA" (ByVal hInstance As Long, ByVal lpCursorName As Long) As Long
 Public Declare Function GetTickCount Lib "kernel32.dll" () As Long
 Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpszOp As String, ByVal lpszFile As String, ByVal lpszParams As String, ByVal LpszDir As String, ByVal FsShowCmd As Long) As Long
 Public Declare Function GetCurrentProcess Lib "Kernel32" () As Long
