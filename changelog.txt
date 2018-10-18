@@ -1,3 +1,13 @@
+Version 1.3.3 - Released on October 18, 2018
+
+  - Hand cursor is shown when hovering over the codespeak website in
+    the about window
+  - Pressing tab to cycle configuration settings is now consistent
+    with the update check setting
+  - The save clan configuration to file on exit setting's casing is
+    now consistent with everything else
+  - Updated readme, also renamed to "Read Me" from "ReadMe" for consistency
+
 Version 1.3.2 - Released on July 29, 2018
 
   - There was an issue using voided keys to create a clan and Simplicity
