@@ -102,7 +102,7 @@ Begin VB.Form frmMain
          Width           =   2175
       End
       Begin VB.CheckBox chkSaveClanInfo 
-         Caption         =   "Save clan configuration to file on exit"
+         Caption         =   "Save Clan Configuration to File on Exit"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   9.75
@@ -116,7 +116,7 @@ Begin VB.Form frmMain
          Left            =   120
          TabIndex        =   14
          Top             =   1920
-         Width           =   3615
+         Width           =   3735
       End
       Begin VB.TextBox txtInitiatesPassword 
          Height          =   285
