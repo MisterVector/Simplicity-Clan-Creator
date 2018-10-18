@@ -43,7 +43,7 @@ Begin VB.Form frmMain
       Caption         =   "Reset Proxies"
       Height          =   480
       Left            =   6720
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   6480
       Width           =   1335
    End
@@ -73,14 +73,14 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   2295
       Left            =   120
-      TabIndex        =   29
+      TabIndex        =   30
       Top             =   1920
       Width           =   7935
       Begin VB.CommandButton btnManageInitiates 
          Caption         =   "Manage Initiates"
          Height          =   375
          Left            =   6240
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   1800
          Width           =   1455
       End
@@ -97,7 +97,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   315
          Left            =   4080
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   1920
          Width           =   2175
       End
@@ -114,7 +114,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   1920
          Width           =   3615
       End
@@ -123,14 +123,14 @@ Begin VB.Form frmMain
          IMEMode         =   3  'DISABLE
          Left            =   6000
          PasswordChar    =   "*"
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   720
          Width           =   1815
       End
       Begin VB.TextBox txtInitiate 
          Height          =   285
          Left            =   6000
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   360
          Width           =   1815
       End
@@ -138,14 +138,14 @@ Begin VB.Form frmMain
          Height          =   315
          Left            =   2160
          MaxLength       =   64
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   1440
          Width           =   1575
       End
       Begin VB.TextBox txtChief 
          Height          =   285
          Left            =   2160
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   360
          Width           =   1575
       End
@@ -154,7 +154,7 @@ Begin VB.Form frmMain
          IMEMode         =   3  'DISABLE
          Left            =   2160
          PasswordChar    =   "*"
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   720
          Width           =   1575
       End
@@ -162,7 +162,7 @@ Begin VB.Form frmMain
          Height          =   285
          Left            =   2160
          MaxLength       =   4
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   1080
          Width           =   1575
       End
@@ -179,7 +179,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   735
          Left            =   4080
-         TabIndex        =   36
+         TabIndex        =   37
          Top             =   1080
          Width           =   3615
       End
@@ -196,7 +196,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   720
          Width           =   1695
       End
@@ -213,7 +213,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   34
+         TabIndex        =   35
          Top             =   360
          Width           =   1695
       End
@@ -230,7 +230,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   33
+         TabIndex        =   34
          Top             =   1440
          Width           =   1575
       End
@@ -247,7 +247,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   360
          Width           =   2055
       End
@@ -264,7 +264,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   720
          Width           =   1935
       End
@@ -281,7 +281,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   1080
          Width           =   975
       End
@@ -290,7 +290,7 @@ Begin VB.Form frmMain
       Caption         =   "Reload Keys"
       Height          =   480
       Left            =   5400
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   6480
       Width           =   1335
    End
@@ -333,7 +333,7 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   1905
       Left            =   120
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   0
       Width           =   7935
       Begin VB.CheckBox chkCheckUpdateOnStartup 
@@ -349,7 +349,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   39
+         TabIndex        =   7
          Top             =   1515
          Width           =   2895
       End
@@ -425,7 +425,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   38
+         TabIndex        =   39
          Top             =   720
          Width           =   1815
       End
@@ -442,7 +442,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   360
          Width           =   1575
       End
@@ -459,7 +459,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   27
+         TabIndex        =   28
          Top             =   1080
          Width           =   1815
       End
@@ -476,7 +476,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   4080
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   720
          Width           =   1935
       End
@@ -493,7 +493,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   1080
          Width           =   1695
       End
@@ -510,7 +510,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   360
          Width           =   2175
       End
@@ -520,7 +520,7 @@ Begin VB.Form frmMain
       Enabled         =   0   'False
       Height          =   480
       Left            =   4080
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   6480
       Width           =   1335
    End
@@ -528,7 +528,7 @@ Begin VB.Form frmMain
       Caption         =   "Check Keys"
       Height          =   480
       Left            =   2640
-      TabIndex        =   19
+      TabIndex        =   20
       Top             =   6480
       Width           =   1455
    End
@@ -537,7 +537,7 @@ Begin VB.Form frmMain
       Enabled         =   0   'False
       Height          =   480
       Left            =   1320
-      TabIndex        =   18
+      TabIndex        =   19
       Top             =   6480
       Width           =   1335
    End
@@ -546,14 +546,14 @@ Begin VB.Form frmMain
       Enabled         =   0   'False
       Height          =   480
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   18
       Top             =   6480
       Width           =   1215
    End
    Begin RichTextLib.RichTextBox rtbChat 
       Height          =   2055
       Left            =   120
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   4320
       Width           =   7965
       _ExtentX        =   14049
@@ -561,7 +561,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -590,7 +589,7 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   255
       Left            =   180
-      TabIndex        =   37
+      TabIndex        =   38
       Top             =   7035
       Width           =   7755
    End
