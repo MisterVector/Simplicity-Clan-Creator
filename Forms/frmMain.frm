@@ -1,12 +1,12 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "richtx32.ocx"
 Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Begin VB.Form frmMain 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Simplicity Clan Creator v%v"
    ClientHeight    =   7455
    ClientLeft      =   150
-   ClientTop       =   780
+   ClientTop       =   840
    ClientWidth     =   8145
    Icon            =   "frmMain.frx":0000
    LinkTopic       =   "Form1"
@@ -561,6 +561,7 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       TextRTF         =   $"frmMain.frx":0CCA
@@ -1264,7 +1265,7 @@ Private Sub tmrCheckUpdate_Timer()
   
     Dim versionToCheck As String, updateMsg As String, msgBoxResult As Integer
   
-    versionToCheck = Split(updateString, "Content-Type: text/plain" & vbCrLf & vbCrLf)(1)
+    versionToCheck = Split(updateString, vbCrLf & vbCrLf)(1)
 
     If (isNewVersion(versionToCheck)) Then
         updateMsg = "There is a new update for Simplicity!" & vbNewLine & vbNewLine & "Your version: " & PROGRAM_VERSION & " new version: " & versionToCheck & vbNewLine & vbNewLine _
