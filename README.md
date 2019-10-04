@@ -4,10 +4,6 @@ Simplicity Clan Creator is a clan creator for Warcraft III that automatically cr
 Warcraft III keys. It works using SOCKS4 and HTTP proxies. It will automatically scan for non-clanned keys
 until it finds 10 non-clanned keys that it can distribute between a chieftain and 9 initiates.
 
-# Legacy Version
-
-This version is a legacy version. It is maintained because there is no suitable alternative yet.
-
 # What is this extra/ doing in .gitignore?
 
 The reason that .gitignore has an entry called `extra/` is so you can create a folder called "extra" in your
