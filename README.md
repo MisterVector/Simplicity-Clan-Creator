@@ -1,3 +1,9 @@
+# Project Is Indefinitely On Hold
+
+Due to changes made by Blizzard that have severely impacted Warcraft III support by third parties, there is
+currently no way forward that I can see for this program. As such, this project is effectively on hold
+indefinitely. In fact, it no longer works anymore.
+
 # Simplicity Clan Creator
 
 Simplicity Clan Creator is a clan creator for Warcraft III that automatically creates clans with 10 working
