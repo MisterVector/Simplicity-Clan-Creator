@@ -175,7 +175,8 @@ Version 0.7 - Released on August 17, 2012
 
   - Slight code improvement in different areas 
   - Updated USEast's IP list, since they changed when Azeroth was put on new hardware
-  - Simplicity checks to see if valid BNCS packets get received, else it reconnects on a new proxy
+  - Simplicity checks to see if valid BNCS packets get received, else it reconnects on a
+    new proxy
   - Missing a message for if the initiates are already part of a clan
 
 Version 0.6 - Released on May 24, 2012
@@ -187,7 +188,8 @@ Version 0.6 - Released on May 24, 2012
   - On refreshing keys, the screen clears
   - All instances of "bot #" are replaced with "Initiate #"
   - Initiate logic separated from Chieftain logic
-  - Simplicity wasn't assigning a key index to future connections, breaking the key export feature
+  - Simplicity wasn't assigning a key index to future connections, breaking the key
+    export feature
   - Chieftain requests friends list upon connecting to Battle.Net, for convenience
   - Using an integer instead of a collection to determine if 10 bots are online
   - Potentially fixed an error stating that sometimes more than 10 bots were ready
@@ -195,12 +197,14 @@ Version 0.6 - Released on May 24, 2012
   - When all required friends are removed, simplicity prevents additional removals
   - Chief will skip adding initiates to friends list, if it already has them as friends
   - A new option allows you to save the clan information to file when closing Simplicity
-  - Simplicity will now disconnect from an HTTP proxy when the proxy fails the connection to BNET
+  - Simplicity will now disconnect from an HTTP proxy when the proxy fails the connection
+    to BNET
   - Prevented an exploit where a user could create a certain clan, disabling Simplicity from
     working on the realm that clan was made in
   - Simplicity is persistent in making sure initiates / chieftain are not disconnected when
     either checking clan tag, or creating the clan
-  - Simplicity will tell you why a clan fails to be created instead of responding with an error code
+  - Simplicity will tell you why a clan fails to be created instead of responding with an
+    error code
   - Updated readme with some more information
   - Simplicity will respond that it failed to check for update, instead of crashing
   - Fixed the "unable to decode CD-Keys" error having to do with spaces in CDKeys.txt file
@@ -208,32 +212,32 @@ Version 0.6 - Released on May 24, 2012
 
 Version 0.5 - Released on March 17, 2012
 
-  - Fixed a bug that caused CreatedClans.txt to not show the realm name (and use an IP instead) if the
-    server selected was not useast.battle.net
+  - Fixed a bug that caused CreatedClans.txt to not show the realm name (and use an IP
+    instead) if the server selected was not useast.battle.net
   - The menu bar now shows the version of Simplicity
   - Update on load that tells what clan Simplicity was made in (Late 3/17/2012 update)
   - The create clan button is disabled upon successful creation of a clan
   - Reconnect timer disables until a new proxy is added, then it is enabled again
-  - Simplicity incorrectly checked to see if 9 bots were connected if one of them drops, instead of 10
+  - Simplicity incorrectly checked to see if 9 bots were connected if one of them drops,     instead of 10
   - Performance tweaks
-  - Dictionary for holding already added bots for friends list feature clears upon reset (error will
-    happen otherwise if you get the same error at a later time)
-  - Added a needed boolean that without, would require you to restart Simplicity after using the
+  - Dictionary for holding already added bots for friends list feature clears upon reset
+    (error will happen otherwise if you get the same error at a later time)
+  - Added a needed boolean that without, would require you to restart Simplicity after
+    using the
     friends list removal feature, then trying to create another clan
-  - Clans exported to CreatedClans.txt will no longer have an added period to the end of both passwords
-    (this could cause confusion if your password ended with a period)
+  - Clans exported to CreatedClans.txt will no longer have an added period to the end of
+    both passwords (this could cause confusion if your password ended with a period)
 
 
 Version 0.4 - Released on August 13, 2011
 
-  - The initiate queue is disabled when the chief disconnects, and re-enabled when
-    it comes back online
+  - The initiate queue is disabled when the chief disconnects, and re-enabled when it comes
+    back online
   - Fixed a few labels
   - "Check Clan Tag" button is disabled again if a user is disconnected after
     all bots are ready, and is re-enabled after 10 are fully connected
-  - If an account reconnects after being suddenly disconnected, an AddChat
-    will display upon entering chat, instead of after checking
-    clanned key
+  - If an account reconnects after being suddenly disconnected, an AddChat will display upon
+    entering chat, instead of after checking clanned key
   - Implemented checks for both password fields when creating a clan
   - Removed unused variables
   - No longer saves initiate username to the config file, or either password
@@ -243,12 +247,13 @@ Version 0.4 - Released on August 13, 2011
     incompatibility (I had used Val() to obtain the length for each BNCS header
     which consequently broke Vista/7 compatibility)
   - UI enhancements
-  - A log is created for each clan that is created. See CreatedClans.txt for a list of past clans
-    created using Simplicity
+  - A log is created for each clan that is created. See CreatedClans.txt for a list of
+    past clans created using Simplicity
   - "Chieftain" config value no longer created in Config.ini
-  - Will ask if you did not supply a description, if you want to add one, when creating the clan
-  - If total initiates to create clan is less than 9 when checking clan tag, a form
-    will come up allowing you to remove friends from the chief's friends list
+  - Will ask if you did not supply a description, if you want to add one, when creating
+    the clan
+  - If total initiates to create clan is less than 9 when checking clan tag, a form will come
+    up allowing you to remove friends from the chief's friends list
   - Updated readme
 
 Version 0.3 - Released on July 21, 2011
